@@ -1,1 +1,15 @@
-On s'en FOU je veux rentrer 
+# Page de garde
+- formulaire de connection
+- bouton de création de compte
+
+## Client
+- formulaire de demande de formation ou de conseil
+- bouton permettant d'afficher l'historique des ses demandes
+- avec la possibilité de modifier ou annuler une demande
+- bouton pour changer ses informations
+
+## Admin
+- visu sur la liste des demandes (avec choix)
+- bouton changement statu demande
+- formulaire de création de formation ou conseil (personnalisé)
+- visu sur liste formation et conseil créé
