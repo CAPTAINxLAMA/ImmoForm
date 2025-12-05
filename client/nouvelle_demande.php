@@ -11,19 +11,19 @@ $_SESSION['token'] = $token; //stockage d'u token généré
 <main>
     <div class="container">
         <form method="POST">
-            <label>type de demande :</label>
+            <label>Type de demande :</label>
             <input type="text" name="text" required>
 
-            <label>type de conseil:</label>
+            <label>Type de conseil :</label>
             <input type="text" name="text" required>
 
-            <label>description detaillé de la demande :</label>
+            <label>Description détaillée de la demande :</label>
             <input type="text" name="text" required>
 
-            <label>Date de la demande:</label>
+            <label>Date de la demande :</label>
             <input type="text" name="readonly" readonly>
 
-            <label>Contact de l'agence:</label>
+            <label>Contact de l'agence :</label>
             <input type="text" name="text">
 
             <label>Agence cliente:</label>
