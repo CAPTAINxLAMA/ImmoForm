@@ -15,7 +15,11 @@ header {
     color: white;
     padding: 20px;
     text-align: center;
+}
+
+.immo {
     text-decoration: None ;
+    color: inherit;
 }
 
 .container {

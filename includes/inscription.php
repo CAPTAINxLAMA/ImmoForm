@@ -1,5 +1,4 @@
-<?php
-include 'header.php'?>
+<?php include 'header.php'?>
 
 <main>
     <div class="container">
@@ -8,7 +7,7 @@ include 'header.php'?>
             <input type="email" name="email" required>
 
             <label>Mot de passe :</label>
-            <input type="password" name="password" required minlength="8">
+            <input type="password" name="password" required>
 
             <label>Confirmer le mot de passe :</label>
             <input type="password" name="confirm_password" required>
@@ -21,4 +20,5 @@ include 'header.php'?>
         </p>
     </div>
 </main>
+
 <?php include 'footer.php'?>
