@@ -20,7 +20,7 @@ $_SESSION['token'] = $token; //stockage d'u token généré
         </form>
 
         <p style="margin-top: 20px;">
-            Pas encore de compte ? <a class='btn1' href="inscription.php">Créer un compte</a>
+            Pas encore de compte ? <a class='btn' href="inscription.php">Créer un compte</a>
         </p>
     </div>
 </main>
