@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <?php include '../includes/header.php';
 
 session_start(); //permet d'initialiser un session pour enregistrer côté serveur le token envoyé à l'utilisateur
@@ -36,5 +35,3 @@ $_SESSION['token'] = $token; //stockage d'u token généré
 </main>
 
 <?php  include '../includes/footer.php'?>
-=======
->>>>>>> origin/main
