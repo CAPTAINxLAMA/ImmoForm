@@ -17,8 +17,7 @@
             <h2>Bienvenue</h2>
 
             <div class="buttons">
-                <a href="client/connexion.php" class="btn">Espace Client</a>
-                <a href="admin/connexion.php" class="btn btn-admin">Espace Admin</a>
+                <a href="includes/connexion.php" class="btn">Espace Connexion</a>
             </div>
         </div>
     </main>
