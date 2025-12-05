@@ -16,7 +16,7 @@
         </form>
 
         <p style="margin-top: 20px;">
-            Déjà un compte ? <a href="connexion.php">Se connecter</a>
+            Déjà un compte ? <a class='btn1' href="connexion.php">Se connecter</a>
         </p>
     </div>
 </main>

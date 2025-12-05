@@ -13,7 +13,7 @@
         </form>
 
         <p style="margin-top: 20px;">
-            Pas encore de compte ? <a href="inscription.php">Créer un compte</a>
+            Pas encore de compte ? <a class='btn1' href="inscription.php">Créer un compte</a>
         </p>
     </div>
 </main>
