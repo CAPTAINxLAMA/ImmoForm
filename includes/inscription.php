@@ -9,7 +9,7 @@ $_SESSION['token'] = $token; //stockage d'u token généré
 
 <main>
     <div class="container">
-        <form method="POST">
+        <form action="/ImmoForm/actions/account.php" method="POST">
             <label>Email :</label>
             <input type="email" name="email" required>
 
@@ -19,6 +19,7 @@ $_SESSION['token'] = $token; //stockage d'u token généré
             <label>Confirmer le mot de passe :</label>
             <input type="password" name="confirm_password" required>
 
+            <input type="hidden" name="token" value="<?php echo $token; ?>"><!--envoi d'un token caché dans le formulaire afin d'éviter un envoi de requet automatique-->
             <button type="submit">S'inscrire</button>
         </form>
 
