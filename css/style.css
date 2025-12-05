@@ -53,11 +53,11 @@ header {
 }
 
 .btn-admin {
-    background-color: #e74c3c;
+    background-color: rebeccapurple;
 }
 
 .btn-admin:hover {
-    background-color: #c0392b;
+    background-color: mediumpurple;
 }
 
 
@@ -71,7 +71,7 @@ input, textarea, select {
 
 button {
     padding: 12px 30px;
-    background-color: #27ae60;
+    background-color: green;
     color: white;
     border: none;
     border-radius: 5px;
@@ -80,7 +80,7 @@ button {
 }
 
 button:hover {
-    background-color: mediumpurple;
+    background-color: mediumseagreen;
 }
 
 .error {
