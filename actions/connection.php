@@ -21,13 +21,20 @@ $req->execute();
 
 $mdpAttendu = $req->fetch();
 
-
 if (password_verify($password, $mdpAttendu['mdp']))
 {
-    $token = rand(0, 1000000); //génération d'un token aléatoire
-    $_SESSION['tokenAccueil'] = $token; //stockage d'un token généré pour l'accueil
+    $tokenAccueil = rand(0, 1000000); //génération d'un token aléatoire
+    $_SESSION['tokenAccueil'] = $tokenAccueil; //stockage d'un token généré pour l'accueil
+    ?>
+    <form action="/ImmoForm/client/navbar.php" method="post" id="autoForm">
+        <input type="hidden" name="tokenAccueil" value="<?php echo $tokenAccueil ?>">
+    </form>
 
-    header("Location: /ImmoForm/client/navbar.php"); // à changer, et mettre la page post-connection
+    <script>
+        document.getElementById('autoForm').submit(); // permet l'auto envoie du formulaire. A ne pas tenir compte, c'est du JS
+    </script>
+
+    <?php
 }
 
 else
