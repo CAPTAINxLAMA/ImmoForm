@@ -1,13 +1,13 @@
 <?php include '../includes/header.php';?>
 <div class="container">
-    <h1>Mes Demandes de Formation</h1>
+    <h1>Mes Formations</h1>
 
     <?php
     include_once "../includes/config.php";
     //Php Data Object → fait le lien avec une base de donnée prédéfinie
     $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-    $req = $pdo->prepare("select * from demandeconseil");
+    $req = $pdo->prepare("select * from conseil");
     $req->execute(); //exécute le select /\
     $conseils = $req->fetchAll(); //va interpréter chaque ligne de la base de donnée en tant que dictionnaire php
     ?>
@@ -18,7 +18,6 @@
             <th>Description | </th>
             <th>Durée | </th>
             <th>Date | </th>
-            <th>Cout | </th>
             <th>Lieu | </th>
             <th>Support | </th>
             <th>Commentaire</th>
@@ -32,7 +31,6 @@
                 <td><?php echo $conseil["Description"] ?></td>
                 <td><?php echo $conseil["Duree"] ?></td>
                 <td><?php echo $conseil["Date"] ?></td>
-                <td><?php echo $conseil["Cout"] ?></td>
                 <td><?php echo $conseil["Lieu"] ?></td>
                 <td><?php echo $conseil["Support"] ?></td>
                 <td><?php echo $conseil["Commentaire"] ?></td>
@@ -47,7 +45,7 @@
         }
         ?>
     </table>
-    <a href="nouvelle_demande.php" class="btn btn-success">Faire une Nouvelle Demande de Formation</a>
+    <a href="creation_formationConseil.php" class="btn btn-success">Créer une Nouvelle Formation</a>
 </div>
 
 <?php  include '../includes/footer.php'?>
