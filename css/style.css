@@ -7,7 +7,7 @@
 body {
     font-family: Arial, sans-serif;
     background-color: black;
-    color: #332;
+    color: black;
 }
 
 header {
@@ -91,4 +91,10 @@ button:hover {
 .success {
     color: #27ae60;
     margin: 10px 0;
+}
+
+
+
+.mes_demandes {
+    color: white;
 }

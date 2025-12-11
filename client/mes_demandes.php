@@ -1,34 +1,45 @@
 <?php include '../includes/header.php';?>
-
+<div class="container">
 <h1>Mes Demandes de Formation</h1>
 
 <?php
-include "includes/config.php";
-////Php Data Object → fait le lien avec une base de donnée prédéfinie
-//$pdo = new PDO("mysql:host=".config::HOST.";dbname=".config::DBNAME, config::USER, config::PASSWORD);
-//
-//$req = $pdo->prepare("select * from categories");
-//$req->execute(); //exécute le select /\
-//$categories = $req->fetchAll(); //va interpréter chaque ligne de la base de donnée en tant que dictionnaire php
-//?>
+include_once "../includes/config.php";
+//Php Data Object → fait le lien avec une base de donnée prédéfinie
+$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
+
+$req = $pdo->prepare("select * from conseil");
+$req->execute(); //exécute le select /\
+$conseils = $req->fetchAll(); //va interpréter chaque ligne de la base de donnée en tant que dictionnaire php
+?>
 
 <table class="table table-stripped">
     <tr>
-        <th>Titre</th>
-        <th>Description</th>
-        <th>Actions</th>
+        <th>Titre | </th>
+        <th>Description | </th>
+        <th>Durée | </th>
+        <th>Date | </th>
+        <th>Cout | </th>
+        <th>Lieu | </th>
+        <th>Support | </th>
+        <th>Commentaire</th>
     </tr>
     <?php
-    foreach ($categories as $categorie)
+    foreach ($conseils  as $conseil)
     {
         ?>
         <tr>
-            <td><?php echo $categorie["titre"] ?></td>
-            <td><?php echo $categorie["description"] ?></td>
+            <td><?php echo $conseil["Titre"] ?></td>
+            <td><?php echo $conseil["Description"] ?></td>
+            <td><?php echo $conseil["Duree"] ?></td>
+            <td><?php echo $conseil["Date"] ?></td>
+            <td><?php echo $conseil["Cout"] ?></td>
+            <td><?php echo $conseil["Lieu"] ?></td>
+            <td><?php echo $conseil["Support"] ?></td>
+            <td><?php echo $conseil["Commentaire"] ?></td>
             <td>
-                <a href="/actions/modifierDemande.php?id=<?php echo $categorie["id"] ?>"
+                <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
                    class="btn btn-sm btn-warning">Modifier</a>
-                <a href="/actions/supprimerDemande.php?id=<?php echo $categorie["id"] ?>"
+                <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
                    class="btn btn-sm btn-danger">Supprimer</a>
             </td>
         </tr>
@@ -37,5 +48,7 @@ include "includes/config.php";
     ?>
 </table>
 <a href="nouvelle_demande.php" class="btn btn-success">Faire une Nouvelle Demande de Formation</a>
+</div>
 
 <?php  include '../includes/footer.php'?>
+
