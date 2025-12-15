@@ -10,7 +10,7 @@ $_SESSION['token'] = $token; //stockage d'u token généré
 
 <main>
     <div class="container">
-        <a class='btn' href="creation_formationConseil.php">Gérer les demandes de formations</a>
+        <a class='btn' href="gerer_demandes.php">Gérer les demandes de formations</a>
         <a class='btn' href="mes_creation.php">Mes formations</a>
         <a class='btn' href="creation_formationConseil.php">Créer une formation</a>
     </div>

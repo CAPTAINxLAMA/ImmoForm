@@ -48,6 +48,7 @@
         ?>
     </table>
     <a href="creation_formationConseil.php" class="btn btn-success">Créer une Nouvelle Formation</a>
+    <a href="navbar.php" class='btn' >Accueil</a>
 </div>
 
 <?php  include '../includes/footer.php'?>
