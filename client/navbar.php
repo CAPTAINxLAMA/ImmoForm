@@ -1,6 +1,6 @@
 <?php include '../includes/header.php';
 
-require 'includes/auth.php';
+require '../includes/auth.php';
 
 requireRole('client');
 
