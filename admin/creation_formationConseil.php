@@ -1,9 +1,14 @@
-<?php include '../includes/header.php';
+<?php include "../includes/header.php";
 
-session_start(); //permet d'initialiser un session pour enregistrer côté serveur le token envoyé à l'utilisateur
+session_start();
 
-$token = rand(0, 1000000); //génération d'un token aléatoire
-$_SESSION['token'] = $token; //stockage d'u token généré
+$tokenServeur = $_SESSION['token'];
+$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
+
+//Je vérifie la cohérence des tokens
+if ($tokenRecu != $tokenServeur) {
+    die("Erreur de token. Vas mourir vilain hacker");
+}
 
 ?>
 
@@ -20,16 +25,16 @@ $_SESSION['token'] = $token; //stockage d'u token généré
             <input type="text" name="text" required>
 
             <label>Date :</label>
-            <input type="text" name="readonly" readonly>
+            <input type="date" name="readonly">
 
             <label>Coût :</label>
             <input type="text" name="text">
 
             <label>Commentaire :</label>
-            <input type="text" name="text">
+            <input type="text" name="text" placeholder="Factultatif">
 
             <label>Support :</label>
-            <input type="text" name="text">
+            <input type="text" name="text" placeholder="Factultatif">
 
             <label>Lieu :</label>
             <input type="text" name="text">

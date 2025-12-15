@@ -27,30 +27,14 @@ $reqAdmin->execute();
 $mdpContactAttendu = $reqContact->fetch();
 $mdpAdminAttendu = $reqAdmin->fetch();
 
-$tokenAccueil = rand(0, 1000000); //génération d'un token aléatoire
-$_SESSION['tokenAccueil'] = $tokenAccueil; //stockage d'un token généré pour l'accueil
-
 if ($mdpContactAttendu != Null && password_verify($password, $mdpContactAttendu['mdp']))
 {
-    ?>
-    <!--Formulaire d'envoi d'un token de vérification, si la connection a fonctionnée-->
-    <form action="../client/navbar.php" method="post" id="autoForm">
-        <input type="hidden" name="tokenAccueil" value="<?php echo $tokenAccueil ?>">
-    </form>
-    <?php
+    header("Location: ../client/navbar.php");
 }
 
 else if ($mdpAdminAttendu != Null && password_verify($password, $mdpAdminAttendu['mdp']))
 {
-    ?>
-    <!--Formulaire d'envoi d'un token de vérification, si la connection a fonctionnée-->
-    <form action="../admin/navbar.php" method="post" id="autoForm">
-        <input type="hidden" name="tokenAccueil" value="<?php echo $tokenAccueil ?>">
-    </form>
-    <script>
-        document.getElementById('autoForm').submit(); // permet l'auto envoie du formulaire. A ne pas tenir compte, c'est du JS
-    </script>
-    <?php
+    header("Location: ../admin/navbar.php");
 }
 
 else
