@@ -18,10 +18,11 @@
         <tr>
             <th>Titre </th>
             <th>Description </th>
-            <th>Durée </th>
+            <th>Durée (en minutes) </th>
             <th>Date </th>
             <th>Lieu </th>
             <th>Support </th>
+            <th>Coût (en euros)</th>
             <th>Commentaire</th>
         </tr>
         <?php
@@ -35,6 +36,7 @@
                 <td><?php echo $conseil["Date"] ?></td>
                 <td><?php echo $conseil["Lieu"] ?></td>
                 <td><?php echo $conseil["Support"] ?></td>
+                <td><?php echo $conseil["Cout"] ?></td>
                 <td><?php echo $conseil["Commentaire"] ?></td>
                 <td>
                     <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
