@@ -35,10 +35,10 @@ $conseils = $req->fetchAll();
             <td><?php echo $conseil["Date"] ?></td>
             <td><?php echo $conseil["Statut"] ?></td>
             <td>
-                <a href="modifierDemande.php?id=<?php echo $conseil["id"] ?>" class="btn1">Modifier</a>
+                <a href="modifierDemande.php?id=<?php echo $conseil["Id"] ?>" class="btn1">Modifier</a>
             </td>
             <td>
-                <a href="supprimerDemande.php?id=<?php echo $conseil["id"] ?>" class="btn2">Supprimer</a>
+                <a href="supprimerDemande.php?id=<?php echo $conseil["Id"] ?>" class="btn2">Supprimer</a>
             </td>
         </tr>
         <?php
