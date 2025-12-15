@@ -20,11 +20,13 @@ try {
 }
 
 // =====================
-// Récupérer l'agence du contact
+// ID du contact connecté (à adapter si tu as une session)
 // =====================
-// Remplace 2 par l'ID du contact connecté, par exemple $_SESSION['contact_id']
-$contact_id = 2;
+$contact_id = 2; // par exemple $_SESSION['contact_id']
 
+// =====================
+// Récupérer l'agence de ce contact
+// =====================
 $stmt = $pdo->prepare("
     SELECT a.Id AS agence_id, a.Nom AS nom_agence
     FROM contact c
@@ -32,11 +34,10 @@ $stmt = $pdo->prepare("
     WHERE c.Id = :contact_id
 ");
 $stmt->execute([':contact_id' => $contact_id]);
-
 $agence = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if ($agence === false) {
-    // Aucun résultat trouvé, définir des valeurs par défaut
+    // Aucun résultat trouvé, valeurs par défaut
     $agence_nom = "Agence non trouvée";
     $agence_id_val = 0;
 } else {
@@ -44,6 +45,25 @@ if ($agence === false) {
     $agence_id_val = $agence['agence_id'];
 }
 
+// =====================
+// Récupérer le contact principal de l'agence
+// =====================
+$stmt_contact = $pdo->prepare("
+    SELECT Id, Nom, Prenom
+    FROM contact
+    WHERE Agence_id = :agence_id
+    LIMIT 1
+");
+$stmt_contact->execute([':agence_id' => $agence_id_val]);
+$contact = $stmt_contact->fetch(PDO::FETCH_ASSOC);
+
+if ($contact === false) {
+    $contact_nom_prenom = "Contact non trouvé";
+    $contact_id_val = 0;
+} else {
+    $contact_nom_prenom = $contact['Nom'] . ' ' . $contact['Prenom'];
+    $contact_id_val = $contact['Id'];
+}
 
 // =====================
 // Traitement du formulaire
@@ -53,9 +73,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $type_conseil = $_POST['type_conseil'];
     $description = $_POST['description'];
     $date_demande = $_POST['date_demande'];
-    $agence_id_post = $_POST['agence_id']; // envoyé par le champ hidden
+    $agence_id_post = $_POST['agence_id'];      // ID envoyé via champ hidden
+    $contact_id_post = $_POST['contact_id'];    // ID du contact envoyé via champ hidden
 
-    $contact_id_post = 0; // par défaut
     $formateur_id = 0;
     $statut = 'En attente';
 
@@ -83,25 +103,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <main>
     <div class="container">
         <form method="POST">
+            <!-- Champ pour le type de demande -->
             <label>Type de demande :</label>
             <input type="text" name="type_demande" required>
 
+            <!-- Champ pour le type de conseil -->
             <label>Type de conseil :</label>
             <input type="text" name="type_conseil" required>
 
+            <!-- Champ pour la description -->
             <label>Description détaillée de la demande :</label>
             <input type="text" name="description" required>
 
+            <!-- Champ pour la date -->
             <label>Date de la demande :</label>
             <input type="date" name="date_demande" value="<?php echo date('Y-m-d'); ?>" readonly>
 
+            <!-- Affichage automatique du contact de l'agence -->
             <label>Contact de l'agence :</label>
-            <input type="text" name="contact_agence">
+            <input type="text" name="contact_agence" value="<?php echo htmlspecialchars($contact_nom_prenom); ?>" readonly>
+            <!-- Champ caché pour l'ID du contact -->
+            <input type="hidden" name="contact_id" value="<?php echo $contact_id_val; ?>">
 
+            <!-- Affichage automatique du nom de l'agence -->
             <label>Agence cliente :</label>
             <input type="text" name="agence_nom" value="<?php echo htmlspecialchars($agence_nom); ?>" readonly>
+            <!-- Champ caché pour l'ID de l'agence -->
             <input type="hidden" name="agence_id" value="<?php echo $agence_id_val; ?>">
 
+            <!-- Statut par défaut -->
             <label>Statut :</label>
             <input type="text" name="statut" value="En attente" readonly>
 
