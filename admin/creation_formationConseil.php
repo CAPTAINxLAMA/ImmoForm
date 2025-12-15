@@ -14,7 +14,9 @@ if ($tokenRecu != $tokenServeur) {
 
 <main>
     <div class="container">
-        <form method="POST">
+        <h2>Un conseil :</h2>
+        <br>
+        <form method="POST" action="../actions/">
             <label>Titre :</label>
             <input type="text" name="text" required>
 
