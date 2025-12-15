@@ -22,34 +22,34 @@ if (!isset($_SESSION['user'])) { // si la session utilisateur n'est pas définie
     ?>
 
     <table class="table table-stripped">
-        <tr>
-            <th>Titre </th>
-            <th>Description </th>
-            <th>Durée (en minutes) </th>
-            <th>Date </th>
-            <th>Lieu </th>
-            <th>Support </th>
-            <th>Coût (en euros)</th>
-            <th>Commentaire</th>
+        <tr class="tr">
+            <th class="th">Titre </th>
+            <th class="th">Description </th>
+            <th class="th">Durée (en minutes) </th>
+            <th class="th">Date </th>
+            <th class="th">Lieu </th>
+            <th class="th">Support </th>
+            <th class="th">Coût (en euros)</th>
+            <th class="th">Commentaire</th>
         </tr>
         <?php
         foreach ($conseils  as $conseil)
         {
             ?>
-            <tr>
-                <td><?php echo $conseil["Titre"] ?></td>
-                <td><?php echo $conseil["Description"] ?></td>
-                <td><?php echo $conseil["Duree"] ?></td>
-                <td><?php echo $conseil["Date"] ?></td>
-                <td><?php echo $conseil["Lieu"] ?></td>
-                <td><?php echo $conseil["Support"] ?></td>
-                <td><?php echo $conseil["Cout"] ?></td>
-                <td><?php echo $conseil["Commentaire"] ?></td>
+            <tr class="tr">
+                <td class="th"><?php echo $conseil["Titre"] ?></td>
+                <td class="th"><?php echo $conseil["Description"] ?></td>
+                <td class="th"><?php echo $conseil["Duree"] ?></td>
+                <td class="th"><?php echo $conseil["Date"] ?></td>
+                <td class="th"><?php echo $conseil["Lieu"] ?></td>
+                <td class="th"><?php echo $conseil["Support"] ?></td>
+                <td class="th"><?php echo $conseil["Cout"] ?></td>
+                <td class="th"><?php echo $conseil["Commentaire"] ?></td>
                 <td>
-                    <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
-                       class="btn">Modifier</a>
-                    <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
-                       class="btn">Supprimer</a>
+                    <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>" class="btn1">Modifier</a>
+                </td>
+                <td>
+                    <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>" class="btn2">Supprimer</a>
                 </td>
             </tr>
             <?php
