@@ -99,41 +99,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     echo "<p style='color:green;'>Demande ajoutée avec succès !</p>";
 }
 ?>
-
 <main>
     <div class="container">
         <form method="POST">
             <!-- Champ pour le type de demande -->
-            <label>Type de demande :</label>
+            <label>Type de demande:</label>
             <input type="text" name="type_demande" required>
 
-            <!-- Champ pour le type de conseil -->
-            <label>Type de conseil :</label>
-            <input type="text" name="type_conseil" required>
 
             <!-- Champ pour la description -->
             <label>Description détaillée de la demande :</label>
-            <input type="text" name="description" required>
+            <textarea name="description" rows="5" cols="50" required></textarea>
 
-            <!-- Champ pour la date -->
-            <label>Date de la demande :</label>
-            <input type="date" name="date_demande" value="<?php echo date('Y-m-d'); ?>" readonly>
 
             <!-- Affichage automatique du contact de l'agence -->
             <label>Contact de l'agence :</label>
             <input type="text" name="contact_agence" value="<?php echo htmlspecialchars($contact_nom_prenom); ?>" readonly>
-            <!-- Champ caché pour l'ID du contact -->
             <input type="hidden" name="contact_id" value="<?php echo $contact_id_val; ?>">
 
             <!-- Affichage automatique du nom de l'agence -->
             <label>Agence cliente :</label>
-            <input type="text" name="agence_nom" value="<?php echo htmlspecialchars($agence_nom); ?>" readonly>
-            <!-- Champ caché pour l'ID de l'agence -->
-            <input type="hidden" name="agence_id" value="<?php echo $agence_id_val; ?>">
+            <label>Agence cliente :</label>
+            <select name="agence_id" required>
+                <option value="">-- Choisissez une agence --</option>
+                <?php
+                // Récupérer toutes les agences depuis la base
+                $result = $pdo->query("SELECT Id, Nom FROM agence");
+                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
+                    echo '<option value="' . $row['Id'] . '">' . htmlspecialchars($row['Nom']) . '</option>';
+                }
+                ?>
+            </select>
 
-            <!-- Statut par défaut -->
-            <label>Statut :</label>
-            <input type="text" name="statut" value="En attente" readonly>
+            <!-- Champs cachés pour la date et le statut -->
+            <input type="hidden" name="date_demande" value="<?php echo date('Y-m-d'); ?>">
+            <input type="hidden" name="statut" value="En attente">
 
             <br><br>
             <input type="submit" value="Envoyer">
