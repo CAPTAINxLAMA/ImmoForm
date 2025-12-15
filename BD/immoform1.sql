@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 15 déc. 2025 à 09:03
+-- Généré le : lun. 15 déc. 2025 à 11:21
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -47,6 +47,13 @@ CREATE TABLE `agence` (
   `NbTransactionsAn` int(11) NOT NULL,
   `Commentaire` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `agence`
+--
+
+INSERT INTO `agence` (`Id`, `Nom`, `Adresse`, `Telephone`, `ContactPrincipal_Id`, `Mail`, `ContactFacturation_Id`, `Adhérent`, `DebutContrat`, `finContrat`, `Statut`, `Region`, `Type`, `NomReseau`, `SecteurActivite`, `NbAgents`, `NbTransactionsAn`, `Commentaire`) VALUES
+(5, 'Agence', 'AdresseAgence', 'TelephoneAgence', 2, 'agence@mail.com', 2, 1, '0000-00-00', '0000-00-00', 1, 'RégionAgence', 'TypeAgence', 'NomRéseauAgence', 'SecteurActivitéAgence', 100, 100, 'Commentaire');
 
 -- --------------------------------------------------------
 
@@ -123,6 +130,13 @@ CREATE TABLE `conseil` (
   `Lieu` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `conseil`
+--
+
+INSERT INTO `conseil` (`id`, `Titre`, `Description`, `Demande_id`, `Duree`, `Date`, `Formateur_id`, `Cout`, `Commentaire`, `Support`, `Lieu`) VALUES
+(1, 'TitreConseil', 'DescriptionConseil', 1, 120, '0000-00-00 00:00:00', 1, 500, 'CommentaireConseil', 'SupportConseil', 'LieuConseil');
+
 -- --------------------------------------------------------
 
 --
@@ -163,8 +177,15 @@ CREATE TABLE `demandeconseil` (
   `Description` text NOT NULL,
   `Date` date NOT NULL,
   `Statut` varchar(20) NOT NULL,
-  `Formateur_id` int(11) NOT NULL
+  `Formateur_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `demandeconseil`
+--
+
+INSERT INTO `demandeconseil` (`id`, `Agence_id`, `Contact_id`, `Type`, `Description`, `Date`, `Statut`, `Formateur_id`) VALUES
+(1, 5, 2, 'TypeConseil', 'DescriptionConseil', '0000-00-00', 'En attente', 1);
 
 -- --------------------------------------------------------
 
@@ -364,13 +385,13 @@ ALTER TABLE `standard`
 -- AUTO_INCREMENT pour la table `agence`
 --
 ALTER TABLE `agence`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `conseil`
 --
 ALTER TABLE `conseil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `contact`
@@ -382,7 +403,7 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT pour la table `demandeconseil`
 --
 ALTER TABLE `demandeconseil`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `formateur`
