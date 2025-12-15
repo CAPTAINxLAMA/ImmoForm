@@ -14,7 +14,7 @@ $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 
 // Interrogation de la base de donnée
-include_once "/ImmoForm/includes/config.php";
+include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 $reqContact = $pdo->prepare("SELECT mdp FROM contact WHERE Email = :email");
