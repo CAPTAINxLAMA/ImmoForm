@@ -25,7 +25,7 @@ if (!$id) {
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$req=$pdo->prepare("select * from demandeconseil where id=:id");
+$req=$pdo->prepare("select * from demandeconseil where Id=:id");
 $req->bindParam(':id', $id);
 $req->execute();
 $demandeconseil=$req->fetchAll();

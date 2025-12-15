@@ -9,10 +9,11 @@ if ($tokenRecu != $tokenServeur) {
 }
 
 //on récupère les données du POST
-$type=filter_input(INPUT_POST,'Type',FILTER_DEFAULT);
-$description=filter_input(INPUT_POST,'Description',FILTER_DEFAULT);
-$agence_id=filter_input(INPUT_POST,'Agence_Id',FILTER_VALIDATE_INT);
-$contact_id=filter_input(INPUT_POST,'Contact_Id',FILTER_VALIDATE_INT);
+$type=filter_input(INPUT_POST,'type',FILTER_DEFAULT);
+$description=filter_input(INPUT_POST,'description',FILTER_DEFAULT);
+$agence_id=filter_input(INPUT_POST,'agence_id',FILTER_VALIDATE_INT);
+$contact_id=filter_input(INPUT_POST,'contact_id',FILTER_VALIDATE_INT);
+$contact_id=filter_input(INPUT_POST,'date_demande',FILTER_VALIDATE_INT);
 
 include "../includes/config.php";
 $pdo = new PDO('mysql:host=' . config::host . ';dbname=' . config::dbname , config::user, config::password);

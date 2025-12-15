@@ -17,8 +17,8 @@ $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$reqContact = $pdo->prepare("SELECT mdp, id FROM contact WHERE Email = :email");
-$reqAdmin = $pdo->prepare("SELECT mdp, id FROM formateur WHERE Email = :email");
+$reqContact = $pdo->prepare("SELECT mdp, Id FROM contact WHERE Email = :email");
+$reqAdmin = $pdo->prepare("SELECT mdp, Id FROM formateur WHERE Email = :email");
 $reqContact->bindParam(':email', $email);
 $reqAdmin->bindParam(':email', $email);
 $reqContact->execute();

@@ -6,46 +6,51 @@ session_start();
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
-include "../includes/config.php";
+include_once "../includes/config.php";
+
+$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
+
+$req = $pdo->prepare("SELECT Nom, Prenom, Id FROM contact WHERE Email = :email");
+$req->bindparam(':email', $_SESSION['user']['email']);
+$req->execute();
+
+$row = $req->fetchAll();
+
 ?>
+
 <main>
     <div class="container">
+        <h2>Un conseil :</h2>
+        <br>
         <form action="../actions/NewDemande.php" method="POST">
-            <!-- Champ pour le type de demande -->
             <label>Type de demande :</label>
-            <input type="text" required maxlength="100" name="Type">
+            <input type="text" required maxlength="100" name="type">
 
+            <label>Description de la demande :</label>
+            <textarea name="description" rows="5" cols="50" required></textarea>
 
-            <!-- Champ pour la description -->
-            <label>Description détaillée de la demande :</label>
-            <textarea name="Description" rows="5" cols="50" required></textarea>
-
-
-            <!-- Affichage automatique du contact de l'agence -->
             <label>Contact de l'agence :</label>
-            <input type="text" name="contact_agence" value="<?php echo 'epsiadmin'; ?>" readonly>
-            <input type="hidden" name="contact_id" value="<?php echo 1 ; ?>">
+            <input type="text" name="contact_agence" value="<?php echo $row['0']['Nom'] . " " . $row['0']['Prenom']; ?>" readonly>
+            <input type="hidden" name="contact_id" value="<?php echo $row['0']['Id']; ?>">
 
-            <!-- Affichage automatique du nom de l'agence -->
             <label>Agence cliente :</label>
             <select name="agence_id" required>
                 <option value="">-- Choisissez une agence --</option>
                 <?php
-                // Récupérer toutes les agences depuis la base
-                $result = $pdo->query("SELECT Id, Nom FROM agence");
-                while ($row = $result->fetch(PDO::FETCH_ASSOC)) {
-                    echo '<option value="' . $row['Id'] . '">' . htmlspecialchars($row['Nom']) . '</option>';
+                // Récupérer toutes les agences depuis la base de donnnée
+                $req = $pdo->prepare("SELECT Id, Nom FROM agence");
+                $row = $req->fetchAll();
+                for ($i=0; $i < count($row); $i++) {
+                    echo '<option value="' . $row[$i]['Id'] . '">' . htmlentities($row[$i]['Nom']) . '</option>';
                 }
                 ?>
             </select>
 
-            <!-- Champs cachés pour la date et le statut -->
             <input type="hidden" name="date_demande" value="<?php echo date('Y-m-d'); ?>">
-            <input type="hidden" name="statut" value="En attente">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-
-            <br><br>
+            <br>
+            <br>
             <input CLASS="btn" type="submit" value="Envoyer">
         </form>
     </div>

@@ -13,7 +13,7 @@ requireRole('admin');
     //Php Data Object → fait le lien avec une base de donnée prédéfinie
     $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-    $req = $pdo->prepare("select * from conseil");
+    $req = $pdo->prepare("SELECT * FROM conseil");
     $req->execute(); //exécute le select /\
     $conseils = $req->fetchAll(); //va interpréter chaque ligne de la base de donnée en tant que dictionnaire php
     ?>
@@ -43,10 +43,10 @@ requireRole('admin');
                 <td class="th"><?php echo $conseil["Cout"] ?></td>
                 <td class="th"><?php echo $conseil["Commentaire"] ?></td>
                 <td>
-                    <a href="modifierConseil.php?id=<?php echo $conseil["id"] ?>" class="btn1">Modifier</a>
+                    <a href="modifierConseil.php?id=<?php echo $conseil["Id"] ?>" class="btn1">Modifier</a>
                 </td>
                 <td>
-                    <a href="supprimerConseil.php?id=<?php echo $conseil["id"] ?>" class="btn2">Supprimer</a>
+                    <a href="supprimerConseil.php?id=<?php echo $conseil["Id"] ?>" class="btn2">Supprimer</a>
                 </td>
             </tr>
             <?php
