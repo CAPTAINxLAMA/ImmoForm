@@ -2,7 +2,7 @@
 
 ?>
 <div class="container">
-    <h1>Mes Formations</h1>
+    <h1>Demandes de Clients</h1>
 
     <?php
     include_once "../includes/config.php";
