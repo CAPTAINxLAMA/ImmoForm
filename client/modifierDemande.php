@@ -1,10 +1,11 @@
 <?php
-session_start();
 
+require 'includes/auth.php';
+
+requireRole('client');
 
 include('../includes/header.php');
 include_once('../includes/config.php');
-
 
 // Création du token CSRF
 $token = rand(0, 1000000);

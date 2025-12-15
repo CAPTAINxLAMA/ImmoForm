@@ -1,14 +1,8 @@
 <?php include "../includes/header.php";
 
-session_start();
+require 'includes/auth.php';
 
-$token = rand(0, 1000000);
-$_SESSION['token'] = $token;
-
-if (!isset($_SESSION['user'])) { // si la session utilisateur n'est pas définie, il l'éjecte
-    header('Location: ../includes/connexion.php');
-    exit;
-}
+requireRole('admin');
 
 ?>
 
