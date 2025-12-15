@@ -12,7 +12,7 @@ requireRole('client');
 include_once "../includes/config.php";
 
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
-$req = $pdo->prepare("SELECT * FROM demandeconseil WHERE ");
+$req = $pdo->prepare("SELECT * FROM demandeconseil");
 $req->execute();
 
 $conseils = $req->fetchAll();
@@ -23,6 +23,7 @@ $conseils = $req->fetchAll();
         <th>Type</th>
         <th>Description</th>
         <th>Date</th>
+        <th>Statut</th>
     </tr>
     <?php
     foreach ($conseils  as $conseil)
@@ -34,12 +35,10 @@ $conseils = $req->fetchAll();
             <td><?php echo $conseil["Date"] ?></td>
             <td><?php echo $conseil["Statut"] ?></td>
             <td>
-                <a href="/client/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
-                   class="btn btn-sm btn-warning">Modifier</a>
+                <a href="modifierDemande.php?id=<?php echo $conseil["id"] ?>" class="btn1">Modifier</a>
             </td>
             <td>
-                <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
-                   class="btn btn-sm btn-danger">Supprimer</a>
+                <a href="supprimerDemande.php?id=<?php echo $conseil["id"] ?>" class="btn2">Supprimer</a>
             </td>
         </tr>
         <?php

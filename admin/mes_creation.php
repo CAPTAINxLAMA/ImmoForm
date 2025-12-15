@@ -43,10 +43,10 @@ requireRole('admin');
                 <td class="th"><?php echo $conseil["Cout"] ?></td>
                 <td class="th"><?php echo $conseil["Commentaire"] ?></td>
                 <td>
-                    <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>" class="btn1">Modifier</a>
+                    <a href="modifierConseil.php?id=<?php echo $conseil["id"] ?>" class="btn1">Modifier</a>
                 </td>
                 <td>
-                    <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>" class="btn2">Supprimer</a>
+                    <a href="supprimerConseil.php?id=<?php echo $conseil["id"] ?>" class="btn2">Supprimer</a>
                 </td>
             </tr>
             <?php

@@ -13,7 +13,7 @@ $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 $confirm_password = filter_input(INPUT_POST, 'confirm_password', FILTER_DEFAULT);
 
-include_once "/ImmoForm/includes/config.php";
+include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 $reqContact = $pdo->prepare("SELECT * FROM contact WHERE Email = :email");
