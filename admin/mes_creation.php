@@ -46,7 +46,7 @@ if (!isset($_SESSION['user'])) { // si la session utilisateur n'est pas définie
                 <td><?php echo $conseil["Cout"] ?></td>
                 <td><?php echo $conseil["Commentaire"] ?></td>
                 <td>
-                    <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
+                    <a href="/client/modifierDemande.php?id=<?php echo $conseil["
                        class="btn">Modifier</a>
                     <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
                        class="btn">Supprimer</a>

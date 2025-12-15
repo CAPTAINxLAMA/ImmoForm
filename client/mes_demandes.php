@@ -37,7 +37,7 @@ $conseils = $req->fetchAll();
             <td><?php echo $conseil["Date"] ?></td>
             <td><?php echo $conseil["Statut"] ?></td>
             <td>
-                <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
+                <a href="/client/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
                    class="btn btn-sm btn-warning">Modifier</a>
                 <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
                    class="btn btn-sm btn-danger">Supprimer</a>
