@@ -19,7 +19,7 @@
             <th>Type | </th>
             <th>Description | </th>
             <th>Date | </th>
-            <th>Statut</th>
+            <th>Statut |</th>
             <th>Gérer par</th>
         </tr>
         <?php
