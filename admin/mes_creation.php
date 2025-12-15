@@ -16,12 +16,12 @@
 
     <table class="table table-stripped">
         <tr>
-            <th>Titre | </th>
-            <th>Description | </th>
-            <th>Durée | </th>
-            <th>Date | </th>
-            <th>Lieu | </th>
-            <th>Support | </th>
+            <th>Titre </th>
+            <th>Description </th>
+            <th>Durée </th>
+            <th>Date </th>
+            <th>Lieu </th>
+            <th>Support </th>
             <th>Commentaire</th>
         </tr>
         <?php
@@ -38,9 +38,9 @@
                 <td><?php echo $conseil["Commentaire"] ?></td>
                 <td>
                     <a href="/actions/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
-                       class="btn btn-sm btn-warning">Modifier</a>
+                       class="btn">Modifier</a>
                     <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
-                       class="btn btn-sm btn-danger">Supprimer</a>
+                       class="btn">Supprimer</a>
                 </td>
             </tr>
             <?php
