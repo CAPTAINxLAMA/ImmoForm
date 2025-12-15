@@ -2,12 +2,12 @@
 
 session_start();
 
-$tokenServeur = $_SESSION['token'];
-$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
+$token = rand(0, 1000000);
+$_SESSION['token'] = $token;
 
-//Je vérifie la cohérence des tokens
-if ($tokenRecu != $tokenServeur) {
-    die("Erreur de token. Vas mourir vilain hacker");
+if (!isset($_SESSION['user'])) { // si la session utilisateur n'est pas définie, il l'éjecte
+    header('Location: ../includes/connexion.php');
+    exit;
 }
 
 ?>
@@ -41,8 +41,8 @@ if ($tokenRecu != $tokenServeur) {
             <label>Lieu :</label>
             <input type="text" name="text">
 
-            <button type="submit">Créer la formation</button>
-            <br>
+            <input type="hidden" name="token" value="<?php echo $token; ?>">
+            <button type="submit">Créer le conseil</button>
             <br>
         </form>
         <a href="navbar.php" class='btn'>Accueil</a>

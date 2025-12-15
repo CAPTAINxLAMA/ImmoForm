@@ -17,23 +17,31 @@ $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$reqContact = $pdo->prepare("SELECT mdp FROM contact WHERE Email = :email");
-$reqAdmin = $pdo->prepare("SELECT mdp FROM formateur WHERE Email = :email");
+$reqContact = $pdo->prepare("SELECT mdp, id FROM contact WHERE Email = :email");
+$reqAdmin = $pdo->prepare("SELECT mdp, id FROM formateur WHERE Email = :email");
 $reqContact->bindParam(':email', $email);
 $reqAdmin->bindParam(':email', $email);
 $reqContact->execute();
 $reqAdmin->execute();
 
-$mdpContactAttendu = $reqContact->fetch();
-$mdpAdminAttendu = $reqAdmin->fetch();
+$ContactAttendu = $reqContact->fetchAll();
+$AdminAttendu = $reqAdmin->fetchAll();
 
-if ($mdpContactAttendu != Null && password_verify($password, $mdpContactAttendu['mdp']))
+if ($ContactAttendu != Null && password_verify($password, $ContactAttendu[0]['mdp']))
 {
+    session_regenerate_id(true); // cette ligne permet de générer un nouvel id de session à chaque connection, limite les attaques
+
+    $_SESSION['user'] = ['id' => $ContactAttendu[0]['Id'], 'email' => $email, 'role' => "client"];
+
     header("Location: ../client/navbar.php");
 }
 
-else if ($mdpAdminAttendu != Null && password_verify($password, $mdpAdminAttendu['mdp']))
+else if ($AdminAttendu != Null && password_verify($password, $AdminAttendu[0]['mdp']))
 {
+    session_regenerate_id(true); // cette ligne permet de générer un nouvel id de session à chaque connection, limite les attaques
+
+    $_SESSION['user'] = ['id' => $AdminAttendu[0]['Id'], 'email' => $email, 'role' => "admin"];
+
     header("Location: ../admin/navbar.php");
 }
 

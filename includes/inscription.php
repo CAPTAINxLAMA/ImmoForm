@@ -1,9 +1,9 @@
 <?php include 'header.php';
 
-session_start(); //permet d'initialiser un session pour enregistrer côté serveur le token envoyé à l'utilisateur
+session_start();
 
-$token = rand(0, 1000000); //génération d'un token aléatoire
-$_SESSION['token'] = $token; //stockage d'u token généré
+$token = rand(0, 1000000);
+$_SESSION['token'] = $token;
 
 ?>
 

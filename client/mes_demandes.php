@@ -1,24 +1,31 @@
 <?php include '../includes/header.php';
 
+session_start();
+
+if (!isset($_SESSION['user'])) { // si la session utilisateur n'est pas définie, il l'éjecte
+    header('Location: ../includes/connexion.php');
+    exit;
+}
+
 ?>
 <div class="container">
-<h1>Mes Demandes de Formation</h1>
+<h1>Mes Demandes de conseil</h1>
 
 <?php
 include_once "../includes/config.php";
-//Php Data Object → fait le lien avec une base de donnée prédéfinie
-$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("select * from demandeconseil");
-$req->execute(); //exécute le select /\
-$conseils = $req->fetchAll(); //va interpréter chaque ligne de la base de donnée en tant que dictionnaire php
+$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
+$req = $pdo->prepare("SELECT * FROM demandeconseil WHERE ");
+$req->execute();
+
+$conseils = $req->fetchAll();
 ?>
 
 <table class="table table-stripped">
     <tr>
-        <th>Type | </th>
-        <th>Description | </th>
-        <th>Date | </th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Date</th>
     </tr>
     <?php
     foreach ($conseils  as $conseil)
@@ -40,7 +47,7 @@ $conseils = $req->fetchAll(); //va interpréter chaque ligne de la base de donn�
     }
     ?>
 </table>
-<a href="nouvelle_demande.php" class="btn btn-success">Faire une Nouvelle Demande de Formation</a>
+<a href="nouvelle_demande.php" class="btn btn-success">Créer une Demande ou un Conseil</a>
 </div>
 
 <?php  include '../includes/footer.php'?>
