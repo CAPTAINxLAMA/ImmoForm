@@ -172,7 +172,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`Id`, `Nom`, `Prenom`, `Numero`, `Email`, `Fonction`, `PreferenceContact`, `Commentaire`, `Agence_Id`, `mdp`) VALUES
-(1, 'epsi', 'client', NULL, 'client', NULL, NULL, NULL, 0, '');
+(1, 'epsi', 'client', NULL, 'client@io', NULL, NULL, NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -225,7 +225,7 @@ CREATE TABLE `formateur` (
 --
 
 INSERT INTO `formateur` (`Nom`, `Prenom`, `Numero`, `Id`, `Email`, `Specialite`, `AnneeExeprience`, `Commentaire`, `DebutCollab`, `FinCollab`, `Statut`, `Certification`, `mdp`) VALUES
-('epsi', 'admin', NULL, 1, 'admin', NULL, NULL, NULL, '0000-00-00', NULL, 0, NULL, NULL);
+('epsi', 'admin', NULL, 1, 'admin@io', NULL, NULL, NULL, '0000-00-00', NULL, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
