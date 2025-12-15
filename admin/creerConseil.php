@@ -4,13 +4,16 @@ require '../includes/auth.php';
 
 requireRole('admin');
 
+$token = rand(0, 1000000);
+$_SESSION['token'] = $token;
+
 ?>
 
 <main>
     <div class="container">
         <h2>Un conseil :</h2>
         <br>
-        <form method="POST" action="../actions/">
+        <form method="POST" action="../actions/createConseil.php">
             <label>Titre :</label>
             <input type="text" name="text" required>
 

@@ -8,9 +8,9 @@ requireRole('admin');
 
 <main>
     <div class="container">
-        <a class='btn' href="gerer_demandes.php">Gérer les Demandes</a>
-        <a class='btn' href="creation_conseil.php">Créer une Formation ou un Conseil</a>
-        <a class='btn' href="mes_creation.php">Voir mes Formations et mes Conseils</a>
+        <a class='btn' href="gererDemandes.php">Gérer les Demandes</a>
+        <a class='btn' href="creerConseil.php">Créer une Formation ou un Conseil</a>
+        <a class='btn' href="mes_creations.php">Voir mes Formations et mes Conseils</a>
     </div>
 </main>
 

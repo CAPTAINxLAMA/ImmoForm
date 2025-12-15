@@ -9,7 +9,7 @@ $_SESSION['token'] = $token;
 
 <main>
     <div class="container">
-        <form action="/ImmoForm/actions/createAccount.php" method="POST">
+        <form action="../actions/createAccount.php" method="POST">
             <label>Email :</label>
             <input type="email" name="email" required>
 

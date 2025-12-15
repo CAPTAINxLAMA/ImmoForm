@@ -2,25 +2,29 @@
 
 require '../includes/auth.php';
 
-requireRole('client');
+requireRole('admin');
 
 include_once "../includes/config.php";
 
-$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
+$pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
+
 $req = $pdo->prepare("SELECT * FROM demandeconseil");
 $req->execute();
 
 $conseils = $req->fetchAll();
+
 ?>
 
 <div class="container">
-    <h2>Mes Demandes de conseil :</h2>
+    <h1>Demandes des Clients :</h1>
+
     <table>
         <tr>
             <th>Type</th>
             <th>Description</th>
             <th>Date</th>
             <th>Statut</th>
+            <th>Prise en charge</th>
         </tr>
         <?php
         foreach ($conseils  as $conseil)
@@ -31,19 +35,18 @@ $conseils = $req->fetchAll();
                 <td><?php echo $conseil["Description"] ?></td>
                 <td><?php echo $conseil["Date"] ?></td>
                 <td><?php echo $conseil["Statut"] ?></td>
+                <td><?php echo $conseil["Formateur_Id"]; if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }?></td>
                 <td>
-                    <a href="modifierDemande.php?id=<?php echo $conseil["Id"] ?>" class="btn1">Modifier</a>
-                </td>
-                <td>
-                    <a href="supprimerDemande.php?id=<?php echo $conseil["Id"] ?>" class="btn2">Supprimer</a>
+                    <a href="../actions/acceptDemande.php?id=<?php echo $conseil[" class="btn">Prendre en charge</a>
+                    <a href="../actions/refuseDemande.php?id=<?php echo $conseil[" class="btn">Rejeter</a>
                 </td>
             </tr>
             <?php
         }
         ?>
     </table>
-    <a href="creerDemande.php" class="btn btn-success">Créer une Demande de Conseil</a>
+    <a href="creerConseil.php" class="btn btn-success">Créer une nouvelle Formation</a>
+    <a href="navbar.php" class='btn' >Accueil</a>
 </div>
 
 <?php  include '../includes/footer.php'?>
-

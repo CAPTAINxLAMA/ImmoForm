@@ -9,7 +9,8 @@ class config
 
 try {
     $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $req = $pdo->prepare("SELECT * FROM agence");
+    $req->execute();
 } catch (PDOException $e) {
     die("Erreur de connexion : " . $e->getMessage());
 }

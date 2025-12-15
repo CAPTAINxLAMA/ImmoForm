@@ -13,12 +13,12 @@ $type=filter_input(INPUT_POST,'type',FILTER_DEFAULT);
 $description=filter_input(INPUT_POST,'description',FILTER_DEFAULT);
 $agence_id=filter_input(INPUT_POST,'agence_id',FILTER_VALIDATE_INT);
 $contact_id=filter_input(INPUT_POST,'contact_id',FILTER_VALIDATE_INT);
-$date=filter_input(INPUT_POST,'date_demande',FILTER_VALIDATE_INT);
+$date=filter_input(INPUT_POST,'date',FILTER_VALIDATE_INT);
 
 include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("INSERT INTO demandeconseil (Type,Description,Contact_Id,Agence_Id, Date, Statut) VALUES (:Type, :Description, :Contact_Id, :Agence_Id, :Date, 'En attente')");
+$req = $pdo->prepare("INSERT INTO demandeconseil (Type, Description, Contact_Id, Agence_Id, Date, Statut) VALUES (:Type, :Description, :Contact_Id, :Agence_Id, :Date, 'En attente')");
 $req->bindParam(':Type', $type);
 $req->bindParam(':Description', $description);
 $req->bindParam(':Agence_Id', $agence_id);
