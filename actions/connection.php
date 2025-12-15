@@ -29,8 +29,8 @@ $mdpAdminAttendu = $reqAdmin->fetch();
 
 $tokenAccueil = rand(0, 1000000); //génération d'un token aléatoire
 $_SESSION['tokenAccueil'] = $tokenAccueil; //stockage d'un token généré pour l'accueil
-var_dump($mdpContactAttendu);
-if (password_verify($password, $mdpContactAttendu['mdp']))
+
+if ($mdpContactAttendu != Null && password_verify($password, $mdpContactAttendu['mdp']))
 {
     ?>
     <!--Formulaire d'envoi d'un token de vérification, si la connection a fonctionnée-->
@@ -40,7 +40,7 @@ if (password_verify($password, $mdpContactAttendu['mdp']))
     <?php
 }
 
-else if (password_verify($password, $mdpAdminAttendu['mdp']))
+else if ($mdpAdminAttendu != Null && password_verify($password, $mdpAdminAttendu['mdp']))
 {
     ?>
     <!--Formulaire d'envoi d'un token de vérification, si la connection a fonctionnée-->
@@ -55,6 +55,7 @@ else if (password_verify($password, $mdpAdminAttendu['mdp']))
 
 else
 {
+    header("Location: /ImmoForm/includes/connexion.php");
     echo "Identifiant ou mot de passe incorrect";
 }
 ?>
