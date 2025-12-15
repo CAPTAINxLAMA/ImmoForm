@@ -20,7 +20,10 @@
             <label>Contact de l'agence :</label>
             <input type="text" name="text">
 
-            <label>Agence cliente:</label>
+            <label>Agence cliente :</label>
+            <input type="text" name="text">
+
+            <label>Statut :</label>
             <input type="text" name="text">
 
 
