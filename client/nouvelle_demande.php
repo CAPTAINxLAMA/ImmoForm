@@ -39,6 +39,8 @@ $row = $req->fetchAll();
                 <?php
                 // Récupérer toutes les agences depuis la base de donnnée
                 $req = $pdo->prepare("SELECT Id, Nom FROM agence");
+                $req->execute();
+
                 $row = $req->fetchAll();
                 for ($i=0; $i < count($row); $i++) {
                     echo '<option value="' . $row[$i]['Id'] . '">' . htmlentities($row[$i]['Nom']) . '</option>';
