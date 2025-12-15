@@ -16,22 +16,37 @@ $confirm_password = filter_input(INPUT_POST, 'confirm_password', FILTER_DEFAULT)
 include_once "/ImmoForm/includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("SELECT * FROM contact WHERE Email = :email");
-$req->bindParam(':email', $email);
-$req->execute();
+$reqContact = $pdo->prepare("SELECT * FROM contact WHERE Email = :email");
+$reqAdmin = $pdo->prepare("SELECT * FROM formateur WHERE Email = :email");
+$reqContact->bindParam(':email', $email);
+$reqAdmin->bindParam(':email', $email);
+$reqContact->execute();
+$reqAdmin->execute();
 
-$emailExiste = $req->fetchAll();
+$emailContactExiste = $reqContact->fetchAll();
+$emailAdminExiste = $reqAdmin->fetchAll();
 
-if ($emailExiste[0]["Email"] == $email && $password == $confirm_password && $emailExiste[0]["mdp"] == NULL)
+if ($emailContactExiste[0]["Email"] == $email && $password == $confirm_password && $emailContactExiste[0]["mdp"] == NULL)
 {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     $req = $pdo->prepare("UPDATE contact SET mdp = :password WHERE Email = :email");
     $req->bindParam(':password', $hashedPassword);
-    $req->bindParam(':email', $emailExiste[0]["Email"]);
+    $req->bindParam(':email', $emailContactExiste[0]["Email"]);
     $req->execute();
 
-    header("Location: /ImmoForm/index.php"); // à changer, et mettre la page post-connection
+    header("Location: /ImmoForm/connexion.php"); // à changer, et mettre la page post-connection
+}
+else if ($emailAdminExiste[0]["Email"] == $email && $password == $confirm_password && $emailAdminExiste[0]["mdp"] == NULL)
+{
+    $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+    $req = $pdo->prepare("UPDATE contact SET mdp = :password WHERE Email = :email");
+    $req->bindParam(':password', $hashedPassword);
+    $req->bindParam(':email', $emailAdminExiste[0]["Email"]);
+    $req->execute();
+
+    header("Location: /ImmoForm/connexion.php"); // à changer, et mettre la page post-connection
 }
 
 else
