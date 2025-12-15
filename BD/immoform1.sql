@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 05 déc. 2025 à 09:19
+-- Généré le : lun. 15 déc. 2025 à 09:03
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -134,12 +134,20 @@ CREATE TABLE `contact` (
   `Nom` varchar(50) NOT NULL,
   `Prenom` varchar(50) NOT NULL,
   `Numero` char(15) DEFAULT NULL,
-  `E-mail` varchar(50) NOT NULL,
+  `Email` varchar(50) NOT NULL,
   `Fonction` varchar(100) DEFAULT NULL,
   `PreferenceContact` varchar(50) DEFAULT NULL,
   `Commentaire` text DEFAULT NULL,
-  `Agence_id` int(11) NOT NULL
+  `Agence_id` int(11) NOT NULL,
+  `mdp` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `contact`
+--
+
+INSERT INTO `contact` (`Id`, `Nom`, `Prenom`, `Numero`, `Email`, `Fonction`, `PreferenceContact`, `Commentaire`, `Agence_id`, `mdp`) VALUES
+(2, 'Haspot', 'Francis', '0606060606', 'haspotfrancis@epsi.com', 'Big Boss', 'CDI', 'Hahah', 0, '$2y$10$fo6CJR4ZLhM3Ql3GINrlz.CE3lhcU/p2cSo5whvTHYX369qMVAoTO');
 
 -- --------------------------------------------------------
 
@@ -169,15 +177,23 @@ CREATE TABLE `formateur` (
   `Prenom` varchar(50) NOT NULL,
   `Numero` char(15) DEFAULT NULL,
   `Id` int(11) NOT NULL,
-  `E-mail` varchar(50) NOT NULL,
+  `Email` varchar(50) NOT NULL,
   `Specialite` varchar(100) DEFAULT NULL,
   `AnneeExeprience` int(11) DEFAULT NULL,
   `Commentaire` text DEFAULT NULL,
   `DebutCollab` date NOT NULL,
   `FinCollab` date DEFAULT NULL,
   `Statut` tinyint(1) NOT NULL,
-  `Certification` varchar(100) DEFAULT NULL
+  `Certification` varchar(100) DEFAULT NULL,
+  `mdp` varchar(100) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `formateur`
+--
+
+INSERT INTO `formateur` (`Nom`, `Prenom`, `Numero`, `Id`, `Email`, `Specialite`, `AnneeExeprience`, `Commentaire`, `DebutCollab`, `FinCollab`, `Statut`, `Certification`, `mdp`) VALUES
+('Foucher', 'Elouan', '0707070707', 1, 'elouanfoucher@epsi.com', 'humour déplacé', 1006, 'personne non recommandable', '0000-00-00', '0000-00-00', 0, 'aucune', '$2y$10$2u1lYa8W2qGcF7BTx8Dza.di0e5tmxHhzj3m8q4C92Po.yEZldV6W');
 
 -- --------------------------------------------------------
 
@@ -301,8 +317,7 @@ ALTER TABLE `conseil`
 -- Index pour la table `contact`
 --
 ALTER TABLE `contact`
-  ADD PRIMARY KEY (`Id`),
-  ADD KEY `contact_agence_id_fk` (`Agence_id`);
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- Index pour la table `demandeconseil`
@@ -349,7 +364,7 @@ ALTER TABLE `standard`
 -- AUTO_INCREMENT pour la table `agence`
 --
 ALTER TABLE `agence`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `conseil`
@@ -361,7 +376,7 @@ ALTER TABLE `conseil`
 -- AUTO_INCREMENT pour la table `contact`
 --
 ALTER TABLE `contact`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `demandeconseil`
@@ -373,7 +388,7 @@ ALTER TABLE `demandeconseil`
 -- AUTO_INCREMENT pour la table `formateur`
 --
 ALTER TABLE `formateur`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `inscription`
@@ -444,12 +459,6 @@ ALTER TABLE `association_standard`
 ALTER TABLE `conseil`
   ADD CONSTRAINT `conseil_demandeconseil_id_fk` FOREIGN KEY (`Demande_id`) REFERENCES `demandeconseil` (`id`),
   ADD CONSTRAINT `conseil_formateur_Id_fk` FOREIGN KEY (`Formateur_id`) REFERENCES `formateur` (`Id`);
-
---
--- Contraintes pour la table `contact`
---
-ALTER TABLE `contact`
-  ADD CONSTRAINT `contact_agence_id_fk` FOREIGN KEY (`Agence_id`) REFERENCES `agence` (`Id`);
 
 --
 -- Contraintes pour la table `demandeconseil`
