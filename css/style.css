@@ -30,6 +30,14 @@ header {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
+.container1 {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
 
 .buttons {
     display: flex;
@@ -58,6 +66,50 @@ header {
 
 .btn-admin:hover {
     background-color: mediumpurple;
+}
+
+.btn1 {
+    display: inline-block;
+    padding: 15px;
+    background-color: darkorange;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn1:hover {
+    background-color: #ffbb3c;
+}
+
+.btn1-admin {
+    background-color: #ffbb3c;
+}
+
+.btn1-admin:hover {
+    background-color: #ffbb3c;
+}
+
+.btn2 {
+    display: inline-block;
+    padding: 15px;
+    background-color: darkred;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.btn2:hover {
+    background-color: #ff2b2b;
+}
+
+.btn2-admin {
+    background-color: #ff2b2b;
+}
+
+.btn2-admin:hover {
+    background-color: #ff2b2b;
 }
 
 
@@ -94,7 +146,13 @@ button:hover {
 }
 
 
-
-.mes_demandes {
-    color: white;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: white;
+}
+th, td {
+    padding: 12px;
+    text-align: center;
 }

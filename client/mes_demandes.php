@@ -39,6 +39,8 @@ $conseils = $req->fetchAll();
             <td>
                 <a href="/client/modifierDemande.php?id=<?php echo $conseil["id"] ?>"
                    class="btn btn-sm btn-warning">Modifier</a>
+            </td>
+            <td>
                 <a href="/actions/supprimerDemande.php?id=<?php echo $conseil["id"] ?>"
                    class="btn btn-sm btn-danger">Supprimer</a>
             </td>
