@@ -9,36 +9,52 @@ if ($tokenRecu != $tokenServeur) {
     die("Erreur de token. Vas mourir vilain hacker");//je stop tout
 }
 
+// Récupération des données de login
 $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 
+// Interrogation de la base de donnée
 include_once "/ImmoForm/includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("SELECT mdp FROM contact WHERE Email = :email");
-$req->bindParam(':email', $email);
-$req->execute();
+$reqContact = $pdo->prepare("SELECT mdp FROM contact WHERE Email = :email");
+$reqAdmin = $pdo->prepare("SELECT mdp FROM formateur WHERE Email = :email");
+$reqContact->bindParam(':email', $email);
+$reqAdmin->bindParam(':email', $email);
+$reqContact->execute();
+$reqAdmin->execute();
 
-$mdpAttendu = $req->fetch();
+$mdpContactAttendu = $reqContact->fetch();
+$mdpAdminAttendu = $reqAdmin->fetch();
 
-if (password_verify($password, $mdpAttendu['mdp']))
+$tokenAccueil = rand(0, 1000000); //génération d'un token aléatoire
+$_SESSION['tokenAccueil'] = $tokenAccueil; //stockage d'un token généré pour l'accueil
+var_dump($mdpContactAttendu);
+if (password_verify($password, $mdpContactAttendu['mdp']))
 {
-    $tokenAccueil = rand(0, 1000000); //génération d'un token aléatoire
-    $_SESSION['tokenAccueil'] = $tokenAccueil; //stockage d'un token généré pour l'accueil
     ?>
-    <form action="/ImmoForm/client/navbar.php" method="post" id="autoForm">
+    <!--Formulaire d'envoi d'un token de vérification, si la connection a fonctionnée-->
+    <form action="../client/navbar.php" method="post" id="autoForm">
         <input type="hidden" name="tokenAccueil" value="<?php echo $tokenAccueil ?>">
     </form>
+    <?php
+}
 
+else if (password_verify($password, $mdpAdminAttendu['mdp']))
+{
+    ?>
+    <!--Formulaire d'envoi d'un token de vérification, si la connection a fonctionnée-->
+    <form action="../admin/navbar.php" method="post" id="autoForm">
+        <input type="hidden" name="tokenAccueil" value="<?php echo $tokenAccueil ?>">
+    </form>
     <script>
         document.getElementById('autoForm').submit(); // permet l'auto envoie du formulaire. A ne pas tenir compte, c'est du JS
     </script>
-
     <?php
 }
 
 else
 {
-    header("Location: /ImmoForm/includes/connexion.php");
     echo "Identifiant ou mot de passe incorrect";
 }
+?>

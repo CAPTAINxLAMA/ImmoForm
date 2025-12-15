@@ -35,18 +35,18 @@ if ($emailContactExiste[0]["Email"] == $email && $password == $confirm_password 
     $req->bindParam(':email', $emailContactExiste[0]["Email"]);
     $req->execute();
 
-    header("Location: /ImmoForm/connexion.php"); // à changer, et mettre la page post-connection
+    header("Location: /ImmoForm/includes/connexion.php"); // à changer, et mettre la page post-connection
 }
 else if ($emailAdminExiste[0]["Email"] == $email && $password == $confirm_password && $emailAdminExiste[0]["mdp"] == NULL)
 {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-    $req = $pdo->prepare("UPDATE contact SET mdp = :password WHERE Email = :email");
+    $req = $pdo->prepare("UPDATE formateur SET mdp = :password WHERE Email = :email");
     $req->bindParam(':password', $hashedPassword);
     $req->bindParam(':email', $emailAdminExiste[0]["Email"]);
     $req->execute();
 
-    header("Location: /ImmoForm/connexion.php"); // à changer, et mettre la page post-connection
+    header("Location: /ImmoForm/includes/connexion.php"); // à changer, et mettre la page post-connection
 }
 
 else
