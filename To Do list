@@ -5,10 +5,10 @@ client
 
 admin
 - faire la page de suppression
-- faire la page de modification
+- faire la page de modification -> Alan
 
 actions
-- modifier conseil
+- modifier conseil -> Alan
 - refuser demande
 - supprimer conseil
 - creer conseil
@@ -17,3 +17,4 @@ actions
 
 
 - rajouter un truc "mdp oublié"
+- le formateur qui acccepte la demande ne présente pas systematiquement la formation (choix du formateur)
