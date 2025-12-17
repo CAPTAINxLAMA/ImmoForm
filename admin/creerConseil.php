@@ -38,9 +38,9 @@ $_SESSION['token'] = $token;
             <input type="text" name="lieu" required>
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-
+            <button type="submit" class="btn3">Créer le conseil</button>
         </form>
-        <a href="creerConseil.php" class="btn3">Créer le conseil</a>
+
         <a href="navbar.php" class='btn'>Accueil</a>
     </div>
 </main>
