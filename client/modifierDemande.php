@@ -39,17 +39,17 @@ if(count($demandeconseil)!=1){
     <h2>Modifier la demande :</h2>
     <br>
     <form action="../actions/updateDemande.php" method="post">
-        <label>Titre :</label>
-        <input type="text" value="<?php echo htmlentities($demandeconseil[0]["Type"]) ?>" name="titre" required maxlength="50">
+        <label>Type :</label>
+        <input type="text" value="<?php echo htmlentities($demandeconseil[0]["Type"]) ?>" name="Type" required maxlength="50">
 
         <label>Description :</label>
         <textarea name="description" rows="4"><?php echo htmlentities($demandeconseil[0]["Description"]) ?></textarea>
 
-        <input type="hidden" name="id" value="<?php echo $id ?>"/>
+        <input type="hidden" name="Id" value="<?php echo $id ?>"/>
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-        <button type="submit" class="btn btn-primary">Enregistrer</button>
-        <a href="mes_demandes.php" class="btn btn-secondary">Annuler</a>
+        <button type="submit" class="btn3">Enregistrer</button>
+        <a href="mes_demandes.php" class="btn2">Annuler</a>
     </form>
 </div>
 
