@@ -7,6 +7,7 @@ requireRole('admin');
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
+$Id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 ?>
 
 <main>
@@ -34,6 +35,8 @@ $_SESSION['token'] = $token;
 
             <label>Lieu :</label>
             <input type="text" name="lieu" required>
+
+            <input type="hidden" name="id" value="<?php echo $Id; ?>">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
 
