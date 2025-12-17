@@ -39,12 +39,7 @@ header {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-.buttons {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 30px;
-}
+
 
 .btn {
     display: inline-block;
@@ -119,6 +114,10 @@ input, textarea, select {
     margin: 10px 0;
     border: 1px solid #ddd;
     border-radius: 4px;
+}
+
+button {
+    all : unset;
 }
 
 .btn3 {
