@@ -27,4 +27,4 @@ $req->bindParam(':Id', $Id);
 $req->execute();
 
 //retour à la page d'accueil
-header("Location: ../index.php");
+header("Location: ../client/navbar.php");
