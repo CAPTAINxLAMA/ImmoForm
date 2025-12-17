@@ -20,7 +20,7 @@ $_SESSION['token'] = $token;
             <input type="password" name="confirm_password"  required minlength="8">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <button type="submit">S'inscrire</button>
+            <button class="btn3" type="submit">S'inscrire</button>
         </form>
 
         <p style="margin-top: 20px;">

@@ -17,7 +17,7 @@ $_SESSION['token'] = $token;
             <input type="password" name="password" required minlength="8">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
-            <button type="submit">Se connecter</button>
+            <button class="btn3" type="submit">Se connecter</button>
         </form>
 
         <p style="margin-top: 20px;">
