@@ -25,4 +25,4 @@ $req->bindParam(':id', $id);
 $req->execute();
 
 //retour à la page d'accueil
-header("Location: ../client/navbar.php");
+header("Location: ../client/mes_demandes.php");

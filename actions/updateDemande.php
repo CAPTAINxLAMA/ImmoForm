@@ -24,4 +24,4 @@ $req->bindParam(':Id', $Id);
 
 $req->execute();
 
-header("Location: ../client/mes_demande.php");
+header("Location: ../client/mes_demandes.php");
