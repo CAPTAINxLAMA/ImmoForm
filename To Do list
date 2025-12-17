@@ -2,7 +2,6 @@ Ce qu'il reste à faire :
 
 client
 - demande_validée pour le client. ressemble à la page gérerConseil
-- faire la page de suppression client
 
 admin
 - faire la page de suppression
@@ -10,8 +9,6 @@ admin
 
 actions
 - modifier conseil
-- modifier demande
-- supprimer demande
 - refuser demande
 - supprimer conseil
 - creer conseil
