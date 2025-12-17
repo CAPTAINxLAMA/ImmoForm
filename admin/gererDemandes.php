@@ -37,15 +37,15 @@ $conseils = $req->fetchAll();
                 <td><?php echo $conseil["Statut"] ?></td>
                 <td><?php echo $conseil["Formateur_Id"]; if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }?></td>
                 <td>
-                    <a href="../actions/acceptDemande.php?id="<?php echo $conseil["Id"] ?> class="btn">Prendre en charge</a>
-                    <a href="../actions/refuseDemande.php?id="<?php echo $conseil["Id"] ?> class="btn">Rejeter</a>
+                    <a href="../actions/acceptDemande.php?id="<?php echo $conseil["Id"] ?> class="btn3">Prendre en charge</a>
+                    <a href="../actions/refuseDemande.php?id="<?php echo $conseil["Id"] ?> class="btn2">Rejeter</a>
                 </td>
             </tr>
             <?php
         }
         ?>
     </table>
-    <a href="creerConseil.php" class="btn btn-success">Créer une nouvelle Formation</a>
+    <a href="creerConseil.php" class="btn3">Créer un Nouveau Conseil</a>
     <a href="navbar.php" class='btn' >Accueil</a>
 </div>
 

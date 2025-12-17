@@ -52,8 +52,14 @@ $conseils = $req->fetchAll();
         }
         ?>
     </table>
-    <a href="creerConseil.php" class="btn">Créer une Nouvelle Formation</a>
-    <a href="navbar.php" class='btn' >Accueil</a>
+        <tr>
+            <td>
+                <a href="creerConseil.php" class="btn3">Créer un Nouveau Conseil</a>
+            </td>
+            <td>
+                <a href="navbar.php" class='btn' >Accueil</a>
+            </td>
+        </tr>
 </div>
 
 <?php  include '../includes/footer.php'?>
