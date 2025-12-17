@@ -15,28 +15,27 @@ $_SESSION['token'] = $token;
         <br>
         <form method="POST" action="../actions/createConseil.php">
             <label>Titre :</label>
-            <input type="text" name="text" required>
+            <input type="text" name="titre" maxlength="50" required>
 
-            <label>Description Détaillée :</label>
-            <input type="text" name="text" required>
+            <label>Description détaillée :</label>
+            <input type="text" name="description" required>
 
             <label>Durée :</label>
-            <input type="text" name="text" required>
+            <input type="number" name="duree" placeholder="En heure" required>
 
-            <label>Date :</label>
-            <input type="date" name="readonly">
+            <!--récupération de la date du jour-->
 
             <label>Coût :</label>
-            <input type="text" name="text">
+            <input type="number" step="0.01" name="cout" placeholder="En euro" required>
 
             <label>Commentaire :</label>
-            <input type="text" name="text" placeholder="Factultatif">
+            <input type="text" name="commentaire" placeholder="Factultatif">
 
             <label>Support :</label>
-            <input type="text" name="text" placeholder="Factultatif">
+            <input type="text" name="support" placeholder="Factultatif">
 
             <label>Lieu :</label>
-            <input type="text" name="text">
+            <input type="text" name="lieu" required>
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
 
