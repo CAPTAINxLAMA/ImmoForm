@@ -23,8 +23,6 @@ $_SESSION['token'] = $token;
             <label>Durée :</label>
             <input type="number" name="duree" placeholder="En heure" required>
 
-            <!--récupération de la date du jour-->
-
             <label>Coût :</label>
             <input type="number" step="0.01" name="cout" placeholder="En euro" required>
 
@@ -42,7 +40,6 @@ $_SESSION['token'] = $token;
             <button class="btn3" type="submit" >Créer le conseil</button>
             <a href="navbar.php" class='btn'>Accueil</a>
         </form>
-
     </div>
 </main>
 
