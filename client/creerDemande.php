@@ -4,7 +4,7 @@ include '../includes/header.php';
 
 require '../includes/auth.php';
 
-requireRole('admin');
+requireRole('client');
 
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
@@ -23,7 +23,7 @@ $contact = $req->fetchAll();
 
 <main>
     <div class="container">
-        <h2>Un conseil :</h2>
+        <h2>Une demande de conseil :</h2>
         <br>
         <form action="../actions/createDemande.php" method="POST">
             <label>Type de demande :</label>
@@ -50,8 +50,6 @@ $contact = $req->fetchAll();
                 }
                 ?>
             </select>
-
-            <input type="hidden" name="date" value="<?php echo date('Y-m-d'); ?>">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
             <br>

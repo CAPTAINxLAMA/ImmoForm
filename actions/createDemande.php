@@ -13,7 +13,7 @@ $type=filter_input(INPUT_POST,'type',FILTER_DEFAULT);
 $description=filter_input(INPUT_POST,'description',FILTER_DEFAULT);
 $agence_id=filter_input(INPUT_POST,'agence_id',FILTER_VALIDATE_INT);
 $contact_id=filter_input(INPUT_POST,'contact_id',FILTER_VALIDATE_INT);
-$date=filter_input(INPUT_POST,'date',FILTER_VALIDATE_INT);
+$date=date('Y-m-d');
 
 include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
