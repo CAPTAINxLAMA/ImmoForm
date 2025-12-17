@@ -10,17 +10,17 @@ if($tokenRecu != $tokenServeur){
 }
 
 //on récupère les données du POST
-$titre=filter_input(INPUT_POST, 'titre', FILTER_DEFAULT);
-$description=filter_input(INPUT_POST, 'description', FILTER_DEFAULT);
-$id=filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+$Type=filter_input(INPUT_POST, 'Type', FILTER_DEFAULT);
+$Description=filter_input(INPUT_POST, 'Description', FILTER_DEFAULT);
+$Id=filter_input(INPUT_POST, 'Id', FILTER_VALIDATE_INT);
 
 include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 //on prépare la requête avec des bindParam pour éviter les injections SQL
-$req=$pdo->prepare("delete from  demandeconseil where Id=:id");
-$req->bindParam(':id', $id);
+$req=$pdo->prepare("delete from  demandeconseil where Id=:Id");
+$req->bindParam(':Id', $Id);
 
 $req->execute();
 

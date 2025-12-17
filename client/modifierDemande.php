@@ -49,7 +49,7 @@ if(count($demandeconseil)!=1){
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
         <button type="submit" class="btn3">Enregistrer</button>
-        <a href="mes_demandes.php" class="btn2">Annuler</a>
+        <a href="mes_demandes.php" class="btn">Annuler</a>
     </form>
 </div>
 

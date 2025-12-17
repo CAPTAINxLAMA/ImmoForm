@@ -11,9 +11,9 @@ include_once('../includes/config.php');
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
-$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+$Id = filter_input(INPUT_GET, "Id", FILTER_VALIDATE_INT);
 
-if (!$id) {
+if (!$Id) {
     http_response_code(404);
     die("ID manquant ou invalide");
 }
@@ -21,8 +21,8 @@ if (!$id) {
 // Connexion à la base de données
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req=$pdo->prepare("SELECT * FROM demandeconseil WHERE Id=:id");
-$req->bindParam(':id', $id);
+$req=$pdo->prepare("SELECT * FROM demandeconseil WHERE Id=:Id");
+$req->bindParam(':Id', $Id);
 $req->execute();
 
 $demandeconseil=$req->fetchAll();
@@ -30,7 +30,7 @@ $demandeconseil=$req->fetchAll();
 // vérification que j'en ai bien récupéré une seule
 if(count($demandeconseil)!=1){
     http_response_code(404);
-    die("Pas de demande conseil pour l'id ".$id);
+    die("Pas de demande conseil pour l'id ".$Id);
 }
 
 ?>
@@ -44,11 +44,11 @@ if(count($demandeconseil)!=1){
       <br> <label>Description :   <?php echo htmlentities($demandeconseil[0]["Description"]) ?></label>
 
 
-        <br> <input type="hidden" name="id" value="<?php echo $id ?>"/>
+        <br> <input type="hidden" name="Id" value="<?php echo $Id ?>"/>
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-        <button type="submit" class="btn btn-primary">supprimer</button>
-        <a href="mes_demandes.php" class="btn btn-secondary">Annuler</a>
+        <button type="submit" class="btn2">Supprimer</button>
+        <a href="mes_demandes.php" class="btn">Annuler</a>
     </form>
 </div>
 
