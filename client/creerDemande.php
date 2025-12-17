@@ -56,6 +56,7 @@ $contact = $req->fetchAll();
             <br>
             <input class="btn" type="submit" value="Envoyer">
         </form>
+        <a href="navbar.php" class="btn btn-secondary">Accueil</a>
     </div>
 </main>
 

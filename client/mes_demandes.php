@@ -7,7 +7,7 @@ requireRole('client');
 include_once "../includes/config.php";
 
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
-$req = $pdo->prepare("SELECT * FROM demandeconseil");
+$req = $pdo->prepare("SELECT * FROM demandeconseil ORDER BY demandeconseil.Id ASC");
 $req->execute();
 
 $conseils = $req->fetchAll();
@@ -43,6 +43,8 @@ $conseils = $req->fetchAll();
         ?>
     </table>
     <a href="creerDemande.php" class="btn btn-success">Créer une Demande de Conseil</a>
+    <a href="navbar.php" class="btn btn-secondary">Accueil</a>
+
 </div>
 
 <?php  include '../includes/footer.php'?>
