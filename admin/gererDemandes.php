@@ -13,6 +13,9 @@ $req->execute();
 
 $conseils = $req->fetchAll();
 
+$token = rand(0, 1000000);
+$_SESSION['token'] = $token;
+
 ?>
 
 <div class="container">
@@ -25,6 +28,9 @@ $conseils = $req->fetchAll();
             <th>Date</th>
             <th>Statut</th>
             <th>Prise en charge</th>
+            <th></th>
+            <th></th>
+            <th></th>
         </tr>
         <?php
         foreach ($conseils  as $conseil)
@@ -35,10 +41,28 @@ $conseils = $req->fetchAll();
                 <td><?php echo $conseil["Description"] ?></td>
                 <td><?php echo $conseil["Date"] ?></td>
                 <td><?php echo $conseil["Statut"] ?></td>
-                <td><?php echo $conseil["Formateur_Id"]; if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }?></td>
+                <td><?php if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }
+                    else {
+                        $req = $pdo->prepare("SELECT * FROM demandeconseil JOIN formateur ON Formateur_Id = formateur.Id WHERE demandeconseil.Id=:Id");
+                        $req->bindParam(':Id', $conseil["Id"]);
+                        $req->execute();
+                        $format = $req->fetch();
+                        echo $format["Nom"]." ".$format["Prenom"];
+                    }
+                    ?>
+                </td>
                 <td>
-                    <a href="creerConseil.php?id="<?php echo $conseil["Id"] ?> class="btn3">Créer un Nouveau Conseil</a>
-                    <a href="../actions/acceptDemande.php?id="<?php echo $conseil["Id"] ?> class="btn3">Prendre en charge</a>
+                    <a href="./creerConseil.php?id="<?php echo $conseil["Id"] ?> class="btn3">Créer un Nouveau Conseil</a>
+                </td>
+                <td>
+                    <form action="../actions/acceptDemande.php" method="POST"">
+                        <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo $conseil["Id"] ?>">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>">
+                        <input class="btn" type="submit" value="Prendre en charge">
+                    </form>
+                </td>
+                <td>
                     <a href="../actions/refuseDemande.php?id="<?php echo $conseil["Id"] ?> class="btn2">Rejeter</a>
                 </td>
             </tr>

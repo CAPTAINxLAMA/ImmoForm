@@ -54,9 +54,6 @@ $conseils = $req->fetchAll();
     </table>
         <tr>
             <td>
-                <a href="creerConseil.php" class="btn3">Créer un Nouveau Conseil</a>
-            </td>
-            <td>
                 <a href="navbar.php" class='btn' >Accueil</a>
             </td>
         </tr>
