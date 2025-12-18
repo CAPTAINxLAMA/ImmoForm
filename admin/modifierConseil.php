@@ -1,7 +1,6 @@
 <?php
-include('../includes/header.php');
+include '../includes/header.php';
 
-// vérification des autorisations
 require '../includes/auth.php';
 
 requireRole('admin');
@@ -36,47 +35,35 @@ if(count($conseil)!=1){
 ?>
 
 <div class="container">
-    <h2>Modifier le conseil :</h2>
-    <br>
     <form action="../actions/updateConseil.php" method="post">
+        <h2>Modifier le conseil :</h2>
+        <br>
+        <label>Titre :</label>
+        <input type="text" name="titre" maxlength="50" required value="<?php echo htmlentities($conseil[0]["Titre"]) ?>">
 
-        <main>
-            <div class="container">
-                <h2>Un conseil :</h2>
-                <br>
-                <form method="POST" action="../actions/createConseil.php">
-                    <label>Titre :</label>
-                    <input type="text" name="titre" maxlength="50" required value="<?php echo htmlentities($conseil[0]["Titre"]) ?>">
+        <label>Description détaillée :</label>
+        <input type="text" name="description" required value="<?php echo htmlentities($conseil[0]["Description"]) ?>">
 
-                    <label>Description détaillée :</label>
-                    <input type="text" name="description" required value="<?php echo htmlentities($conseil[0]["Description"]) ?>">
+        <label>Durée :</label>
+        <input type="number" name="duree" placeholder="En heure" required value="<?php echo htmlentities($conseil[0]["Duree"]) ?>">
 
-                    <label>Durée :</label>
-                    <input type="number" name="duree" placeholder="En heure" required value="<?php echo htmlentities($conseil[0]["Duree"]) ?>">
+        <label>Coût :</label>
+        <input type="number" step="0.01" name="cout" placeholder="En euro" required value="<?php echo htmlentities($conseil[0]["Cout"]) ?>">
 
-                    <!--récupération de la date du jour-->
+        <label>Commentaire :</label>
+        <input type="text" name="commentaire" placeholder="Factultatif" value="<?php echo htmlentities($conseil[0]["Commentaire"]) ?>">
 
-                    <label>Coût :</label>
-                    <input type="number" step="0.01" name="cout" placeholder="En euro" required value="<?php echo htmlentities($conseil[0]["Cout"]) ?>">
+        <label>Support :</label>
+        <input type="text" name="support" placeholder="Factultatif" value="<?php echo htmlentities($conseil[0]["Support"]) ?>">
 
-                    <label>Commentaire :</label>
-                    <input type="text" name="commentaire" placeholder="Factultatif" value="<?php echo htmlentities($conseil[0]["Commentaire"]) ?>">
+        <label>Lieu :</label>
+        <input type="text" name="lieu" required value="<?php echo htmlentities($conseil[0]["Lieu"]) ?>">
 
-                    <label>Support :</label>
-                    <input type="text" name="support" placeholder="Factultatif" value="<?php echo htmlentities($conseil[0]["Support"]) ?>">
+        <input type="hidden" name="id" value="<?php echo $id ?>"/>
+        <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-                    <label>Lieu :</label>
-                    <input type="text" name="lieu" required value="<?php echo htmlentities($conseil[0]["Lieu"]) ?>">
-
-                    <input type="hidden" name="id" value="<?php echo $id ?>"/>
-                    <input type="hidden" name="token" value="<?php echo $token; ?>">
-
-                    <button type="submit" class="btn3">Enregistrer</button>
-                    <a href="mes_demandes.php" class="btn">Annuler</a>
-                </form>
-
-            </div>
-        </main>
+        <button type="submit" class="btn3">Enregistrer</button>
+        <a href="mes_creations.php" class="btn">Annuler</a>
     </form>
 </div>
 
