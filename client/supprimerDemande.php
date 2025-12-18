@@ -11,7 +11,7 @@ include_once('../includes/config.php');
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
-$Id = filter_input(INPUT_GET, "Id", FILTER_VALIDATE_INT);
+$Id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
 
 if (!$Id) {
     http_response_code(404);
