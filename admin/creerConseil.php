@@ -36,12 +36,30 @@ $Id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
             <label>Lieu :</label>
             <input type="text" name="lieu" required>
 
+            <label>Formateur :</label>
+            <select name="formateur_id" required>
+                <option>-- Choisissez un formateur --</option>
+                <?php
+                include_once "../includes/config.php";
+
+                $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
+
+                $req = $pdo->prepare("SELECT * FROM formateur");
+                $req->execute();
+
+                $formateur = $req->fetchAll();
+                for ($i = 0; $i < count($formateur); $i++) {
+                    echo '<option value="' . $formateur[$i]['Id'] . '">' . htmlentities($formateur[$i]['Nom']) . ' ' . htmlentities($formateur[$i]['Prenom']) . '</option>';
+                }
+                ?>
+            </select>
+
             <input type="hidden" name="id" value="<?php echo $Id; ?>">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
 
             <button class="btn3" type="submit" >Créer le conseil</button>
-            <a href="navbar.php" class='btn'>Accueil</a>
+            <a href="gererDemandes.php" class='btn'>Annuler</a>
         </form>
     </div>
 </main>

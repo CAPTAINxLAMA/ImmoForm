@@ -7,7 +7,7 @@ requireRole('admin');
 include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("SELECT * FROM conseil");
+$req = $pdo->prepare("SELECT * FROM conseil LEFT JOIN formateur ON conseil.formateur_id = formateur.id");
 $req->execute();
 
 $conseils = $req->fetchAll();
@@ -27,6 +27,7 @@ $conseils = $req->fetchAll();
             <th>Support</th>
             <th>Coût</th>
             <th>Commentaire</th>
+            <th>Formateur</th>
         </tr>
         <?php
         foreach ($conseils  as $conseil)
@@ -41,6 +42,7 @@ $conseils = $req->fetchAll();
                 <td><?php echo $conseil["Support"] ?></td>
                 <td><?php echo $conseil["Cout"] ?> €</td>
                 <td><?php echo $conseil["Commentaire"] ?></td>
+                <td><?php echo $conseil["Nom"].' '.$conseil["Prenom"] ?></td>
                 <td>
                     <a href="modifierConseil.php?id=<?php echo $conseil["Id"] ?>" class="btn1">Modifier</a>
                 </td>
