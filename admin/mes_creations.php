@@ -19,12 +19,12 @@ $conseils = $req->fetchAll();
 
     <table>
         <tr>
-            <th>Titre </th>
-            <th>Description </th>
+            <th>Titre</th>
+            <th>Description</th>
             <th>Durée</th>
-            <th>Date </th>
-            <th>Lieu </th>
-            <th>Support </th>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Support</th>
             <th>Coût</th>
             <th>Commentaire</th>
         </tr>
