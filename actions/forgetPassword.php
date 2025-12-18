@@ -13,6 +13,14 @@ $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 
 include_once "../includes/config.php";
 
+// PLUS BESOIN DE PHPMailer pour la version de test
+// Décommentez ces lignes quand vous voudrez vraiment envoyer des emails
+/*
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+require 'vendor/autoload.php';
+*/
+
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 $reqContact = $pdo->prepare("SELECT * FROM contact WHERE Email = :email");
@@ -22,66 +30,89 @@ $reqAdmin->bindParam(':email', $email);
 $reqContact->execute();
 $reqAdmin->execute();
 
-if ($reqAdmin->fetch())
+$userAdmin = $reqAdmin->fetch();
+$userContact = $reqContact->fetch();
+
+if ($userAdmin || $userContact)
 {
     // Générer un token sécurisé
     $token = rand(0, 1000000);
     $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
 
-    // Enregistrer le token en DB
-    $req = $pdo->prepare("UPDATE formateur SET reset_token = :reset_token, reset_token_expiry = :reset_token_expiry WHERE email = :email");
+    if ($userAdmin) {
+        $req = $pdo->prepare("UPDATE formateur SET reset_token = :reset_token, reset_token_expiry = :reset_token_expiry WHERE Email = :email");
+    }
+    else {
+        $req = $pdo->prepare("UPDATE contact SET reset_token = :reset_token, reset_token_expiry = :reset_token_expiry WHERE Email = :email");
+    }
     $req->bindParam(':reset_token', $token);
     $req->bindParam(':reset_token_expiry', $expiry);
     $req->bindParam(':email', $email);
     $req->execute();
 
-    // Préparer l'email
+    // Préparer le lien de réinitialisation
     $reset_link = "http://localhost:63342/ImmoForm/includes/reinitialisationMDP.php?token=" . $token;
-    $subject = "Réinitialisation de votre mot de passe";
-    $message = "Bonjour,\n\n";
-    $message .= "Vous avez demandé la réinitialisation de votre mot de passe.\n";
-    $message .= "Cliquez sur ce lien pour réinitialiser votre mot de passe :\n\n";
-    $message .= $reset_link . "\n\n";
-    $message .= "Ce lien expire dans 1 heure.\n";
-    $message .= "Si vous n'avez pas fait cette demande, ignorez cet email.";
 
-    $headers = "From: admin@io\r\n";
+    // VERSION TEST : Enregistrer le lien dans un fichier texte au lieu d'envoyer un email
+    /*// Envoyer l'email avec PHPMailer
+    $mail = new PHPMailer(true);
 
-    // Envoyer l'email
-    mail($email, $subject, $message, $headers);
+    try {
+        // Configuration SMTP
+        $mail->isSMTP();
+        $mail->Host = 'smtp.gmail.com'; // Serveur SMTP de Gmail
+        $mail->SMTPAuth = true;
+        $mail->Username = 'votre.email@gmail.com'; // REMPLACEZ par votre email
+        $mail->Password = 'votre_mot_de_passe_application'; // REMPLACEZ par votre mot de passe d'application Gmail
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Port = 587;
+        $mail->CharSet = 'UTF-8';
+
+        // Expéditeur et destinataire
+        $mail->setFrom('votre.email@gmail.com', 'ImmoForm');
+        $mail->addAddress($email);
+
+        // Contenu de l'email
+        $mail->isHTML(true);
+        $mail->Subject = 'Réinitialisation de votre mot de passe';
+        $mail->Body = "
+            <html>
+            <body style='font-family: Arial, sans-serif;'>
+                <h2>Réinitialisation de mot de passe</h2>
+                <p>Bonjour,</p>
+                <p>Vous avez demandé la réinitialisation de votre mot de passe.</p>
+                <p>Cliquez sur le bouton ci-dessous pour réinitialiser votre mot de passe :</p>
+                <p style='margin: 30px 0;'>
+                    <a href='$reset_link' style='background:#007bff;color:white;padding:12px 24px;text-decoration:none;display:inline-block;border-radius:4px;'>
+                        Réinitialiser mon mot de passe
+                    </a>
+                </p>
+                <p>Ou copiez ce lien dans votre navigateur :</p>
+                <p style='background:#f4f4f4;padding:10px;word-break:break-all;'>$reset_link</p>
+                <p><strong>⚠️ Ce lien expire dans 1 heure.</strong></p>
+                <p style='color:#666;font-size:12px;margin-top:30px;'>
+                    Si vous n'avez pas fait cette demande, ignorez cet email. Votre mot de passe ne sera pas modifié.
+                </p>
+            </body>
+            </html>
+        ";
+
+        // Version texte brut (fallback)
+        $mail->AltBody = "Bonjour,\n\nVous avez demandé la réinitialisation de votre mot de passe.\n\nCliquez sur ce lien : $reset_link\n\nCe lien expire dans 1 heure.\n\nSi vous n'avez pas fait cette demande, ignorez cet email.";
+
+        $mail->send();*/
+    // Cela permet de tester sans configurer SMTP
+    $log_message = date('Y-m-d H:i:s') . " | Email: $email | Lien: $reset_link\n";
+    file_put_contents(__DIR__ . '/../reset_links.txt', $log_message, FILE_APPEND);
+
+    // Redirection avec message de succès
+    header("Location: ../includes/forgetPassword.php?success=1");
+    exit;
 }
 
-else if ($reqContact->fetch())
-{
-    // Générer un token sécurisé
-    $token = rand(0, 1000000);
-    $expiry = date('Y-m-d H:i:s', strtotime('+1 hour'));
-
-    // Enregistrer le token en DB
-    $req = $pdo->prepare("UPDATE contact SET reset_token = :reset_token, reset_token_expiry = :reset_token_expiry WHERE email = :email");
-    $req->bindParam(':reset_token', $token);
-    $req->bindParam(':reset_token_expiry', $expiry);
-    $req->bindParam(':email', $email);
-    $req->execute();
-
-
-    // Préparer l'email
-    $reset_link = "http://localhost:63342/ImmoForm/includes/reinitialisationMDP.php?token=" . $token;
-    $subject = "Réinitialisation de votre mot de passe";
-    $message = "Bonjour,\n\n";
-    $message .= "Vous avez demandé la réinitialisation de votre mot de passe.\n";
-    $message .= "Cliquez sur ce lien pour réinitialiser votre mot de passe :\n\n";
-    $message .= $reset_link . "\n\n";
-    $message .= "Ce lien expire dans 1 heure.\n";
-    $message .= "Si vous n'avez pas fait cette demande, ignorez cet email.";
-
-    $headers = "From: admin@io\r\n";
-
-    // Envoyer l'email
-    mail($email, $subject, $message, $headers);
-}
-
-else
-{
-    header("Location: ../includes/forgetPassword.php");
+else {
+    // IMPORTANT : Ne pas révéler si l'email existe ou non (sécurité)
+    // On redirige avec un message de succès même si l'email n'existe pas
+    header("Location: ../includes/forgetPassword.php?success=1");
+    exit;
 }
