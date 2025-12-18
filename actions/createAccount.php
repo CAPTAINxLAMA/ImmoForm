@@ -46,7 +46,7 @@ else if ($emailAdminExiste[0]["Email"] == $email && $password == $confirm_passwo
     $req->bindParam(':email', $emailAdminExiste[0]["Email"]);
     $req->execute();
 
-    header("Location: /ImmoForm/includes/connexion.php"); // à changer, et mettre la page post-connection
+    header("Location: /ImmoForm/includes/connexion.php");
 }
 
 else
