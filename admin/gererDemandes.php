@@ -63,7 +63,12 @@ $_SESSION['token'] = $token;
                     </form>
                 </td>
                 <td>
-                    <a href="../actions/refuseDemande.php?id="<?php echo $conseil["Id"] ?> class="btn2">Rejeter</a>
+                    <form action="../actions/refuseDemande.php" method="POST"">
+                        <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
+                        <input type="hidden" name="id" value="<?php echo $conseil["Id"] ?>">
+                        <input type="hidden" name="token" value="<?php echo $token; ?>">
+                        <input class="btn" type="submit" value="Rejeter">
+                    </form>
                 </td>
             </tr>
             <?php
