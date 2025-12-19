@@ -43,7 +43,7 @@ if(count($demandeconseil)!=1){
         <input type="text" value="<?php echo htmlentities($demandeconseil[0]["Type"]) ?>" name="Type" required maxlength="50">
 
         <label>Description :</label>
-        <textarea name="description" rows="4"><?php echo htmlentities($demandeconseil[0]["Description"]) ?></textarea>
+        <textarea name="Description" rows="4"><?php echo htmlentities($demandeconseil[0]["Description"]) ?></textarea>
 
         <input type="hidden" name="Id" value="<?php echo $id ?>"/>
         <input type="hidden" name="token" value="<?php echo $token; ?>">
