@@ -39,7 +39,32 @@ header {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
+.container2 {
+    max-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
+}
+
+.container3 {
+    display: flex;
+    justify-content: space-around;
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+
+}
+
+select {
+    background-color: rebeccapurple;
+    color: white;
+}
 
 .btn {
     display: inline-block;
@@ -47,8 +72,9 @@ header {
     background-color: rebeccapurple;
     color: white;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .btn:hover {
@@ -71,6 +97,7 @@ header {
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .btn1:hover {
@@ -93,6 +120,7 @@ header {
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .btn2:hover {
@@ -128,6 +156,7 @@ button {
     text-decoration: none;
     border-radius: 4px;
     transition: background-color 0.3s;
+    cursor: pointer;
 }
 
 .btn3:hover {
@@ -143,7 +172,6 @@ button {
     color: #27ae60;
     margin: 10px 0;
 }
-
 
 table {
     width: 100%;
