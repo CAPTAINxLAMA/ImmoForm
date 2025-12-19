@@ -57,8 +57,30 @@ header {
     padding: 20px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
+.container-connexion{
+    max-width: 600px ;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+input {
+    all : unset;
+}
+
+input[type="email"],
+input[type="password"] {
+    max-width: 540px;
+}
+
+input[type="submit"]{
+    text-align: center;
+    max-width: 150px;
 }
 
 select {
@@ -68,7 +90,7 @@ select {
 
 .btn {
     display: inline-block;
-    padding: 15px 30px;
+    padding: 15px;
     background-color: rebeccapurple;
     color: white;
     text-decoration: none;
@@ -162,6 +184,30 @@ button {
 .btn3:hover {
     background-color: mediumseagreen;
 }
+
+.btn0 {
+    display: inline-block;
+    padding: 15px 8px;
+    background-color: rebeccapurple;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+    cursor: pointer;
+}
+
+.btn0:hover {
+    background-color: mediumpurple;
+}
+
+.btn0-admin {
+    background-color: rebeccapurple;
+}
+
+.btn0-admin:hover {
+    background-color: mediumpurple;
+}
+
 
 .error {
     color: #e74c3c;

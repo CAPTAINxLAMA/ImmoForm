@@ -39,14 +39,14 @@ if(count($conseil)!=1){
     <br>
     <form action="../actions/deleteConseil.php" method="post">
 
-        <label><b>Titre :</b> <?php echo htmlentities($conseil[0]["Titre"]) ?></label>
-        <label><b>Description :</b> <?php echo htmlentities($conseil[0]["Description"]) ?></label>
-        <label><b>Durée :</b> <?php echo htmlentities($conseil[0]["Duree"]) ?></label>
-        <label><b>Date :</b> <?php echo htmlentities($conseil[0]["Date"]) ?></label>
-        <label><b>Lieu :</b> <?php echo htmlentities($conseil[0]["Lieu"]) ?></label>
-        <label><b>Support :</b> <?php echo htmlentities($conseil[0]["Support"]) ?></label>
-        <label><b>Coût :</b> <?php echo htmlentities($conseil[0]["Cout"]) ?></label>
-        <label><b>Commentaire :</b> <?php echo htmlentities($conseil[0]["Commentaire"]) ?></label>
+        <label><b>Titre :</b> <?php echo htmlentities($conseil[0]["Titre"]) ?></label><br><br>
+        <label><b>Description :</b> <?php echo htmlentities($conseil[0]["Description"]) ?></label><br><br>
+        <label><b>Durée :</b> <?php echo htmlentities($conseil[0]["Duree"]) ?></label><br><br>
+        <label><b>Date :</b> <?php echo htmlentities($conseil[0]["Date"]) ?></label><br><br>
+        <label><b>Lieu :</b> <?php echo htmlentities($conseil[0]["Lieu"]) ?></label><br><br>
+        <label><b>Support :</b> <?php echo htmlentities($conseil[0]["Support"]) ?></label><br><br>
+        <label><b>Coût :</b> <?php echo htmlentities($conseil[0]["Cout"]) ?></label><br><br>
+        <label><b>Commentaire :</b> <?php echo htmlentities($conseil[0]["Commentaire"]) ?></label><br><br>
 
         <br> <input type="hidden" name="Id" value="<?php echo $Id ?>"/>
         <input type="hidden" name="token" value="<?php echo $token; ?>">

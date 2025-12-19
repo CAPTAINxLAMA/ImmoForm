@@ -8,7 +8,7 @@ $_SESSION['token'] = $token;
 ?>
 
 <main>
-    <div class="container3">
+    <div class="container-connexion">
         <form action="../actions/connection.php" method="POST">
             <label>Email :</label>
             <input type="email" name="email" required>
@@ -20,7 +20,6 @@ $_SESSION['token'] = $token;
             <button class="btn3" type="submit">Se connecter</button>
             <a class='btn' href="oublieMDP.php">Mot de passe oublié ?</a>
         </form>
-
 
 
         <p style="margin-top: 20px;">

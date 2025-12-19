@@ -8,7 +8,7 @@ $_SESSION['token'] = $token;
 ?>
 
 <main>
-    <div class="container">
+    <div class="container-connexion">
         <form action="../actions/createAccount.php" method="POST">
             <label>Email :</label>
             <input type="email" name="email" required>

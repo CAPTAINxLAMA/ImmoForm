@@ -59,7 +59,7 @@ $demandes = $req->fetchAll();
     </table>
     <tr>
         <td>
-            <a href="mes_demandes.php" class="btn3">Retour</a>
+            <a href="mes_demandes.php" class="btn">Retour</a>
         </td>
         <td>
             <a href="navbar.php" class='btn' >Accueil</a>

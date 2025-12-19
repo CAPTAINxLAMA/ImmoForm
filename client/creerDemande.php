@@ -54,9 +54,10 @@ $contact = $req->fetchAll();
             <input type="hidden" name="token" value="<?php echo $token; ?>">
             <br>
             <br>
-            <input class="btn" type="submit" value="Envoyer">
+            <input class="btn3" type="submit" value="Envoyer">
+            <a href="navbar.php" class="btn">Accueil</a>
         </form>
-        <a href="navbar.php" class="btn btn-secondary">Accueil</a>
+
     </div>
 </main>
 

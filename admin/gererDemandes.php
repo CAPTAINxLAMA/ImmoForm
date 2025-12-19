@@ -59,7 +59,7 @@ $_SESSION['token'] = $token;
                         <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
                         <input type="hidden" name="id" value="<?php echo $conseil["Id"] ?>">
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
-                        <input class="btn" type="submit" value="Prendre en charge">
+                        <input class="btn0" type="submit" value="Prendre en charge">
                     </form>
                 </td>
                 <td>
@@ -67,7 +67,7 @@ $_SESSION['token'] = $token;
                         <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
                         <input type="hidden" name="id" value="<?php echo $conseil["Id"] ?>">
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
-                        <input class="btn" type="submit" value="Rejeter">
+                        <input class="btn0" type="submit" value="Rejeter">
                     </form>
                 </td>
             </tr>
