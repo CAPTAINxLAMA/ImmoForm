@@ -17,7 +17,7 @@ var_dump($conseils);
 ?>
 
 <div class="container">
-    <h2>Mes Formations :</h2>
+    <h2>Mes Conseils :</h2>
 
     <table>
         <tr>
