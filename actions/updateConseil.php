@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 $tokenServeur= $_SESSION['token'];
@@ -10,26 +9,28 @@ if($tokenRecu != $tokenServeur){
 }
 
 //on récupère les données du POST
-$Titre = filter_input(INPUT_POST, 'titre', FILTER_DEFAULT);
-$Description = filter_input(INPUT_POST, 'description', FILTER_DEFAULT);
-$Duree = filter_input(INPUT_POST, 'duree', FILTER_DEFAULT);
-$Cout = filter_input(INPUT_POST, 'cout', FILTER_DEFAULT);
-$Commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_DEFAULT);
-$Support = filter_input(INPUT_POST, 'support', FILTER_DEFAULT);
-$Lieu = filter_input(INPUT_POST, 'lieu', FILTER_DEFAULT);
-$id=filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+$titre = filter_input(INPUT_POST, 'titre', FILTER_DEFAULT);
+$description = filter_input(INPUT_POST, 'description', FILTER_DEFAULT);
+$duree = filter_input(INPUT_POST, 'duree', FILTER_DEFAULT);
+$cout = filter_input(INPUT_POST, 'cout', FILTER_DEFAULT);
+$commentaire = filter_input(INPUT_POST, 'commentaire', FILTER_DEFAULT);
+$support = filter_input(INPUT_POST, 'support', FILTER_DEFAULT);
+$lieu = filter_input(INPUT_POST, 'lieu', FILTER_DEFAULT);
+$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
+// Connexion à la base de données
 include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req=$pdo->prepare("UPDATE conseil SET Titre=:Titre, Description=:Description, Duree=:Duree, Cout=:Cout, Commentaire=:Commentaire, Support=:Support, Lieu=:Lieu WHERE id=:id");
-$req->bindParam(':Titre', $Titre);
-$req->bindParam(':Description', $Description);
-$req->bindParam(':Duree', $Duree);
-$req->bindParam(':Cout', $Cout);
-$req->bindParam(':Commentaire', $Commentaire);
-$req->bindParam(':Support', $Support);
-$req->bindParam(':Lieu', $Lieu);
+// Envoie de la requête SQL
+$req = $pdo->prepare("UPDATE conseil SET Titre=:titre, Description=:description, Duree=:duree, Cout=:cout, Commentaire=:commentaire, Support=:support, Lieu=:lieu WHERE id=:id");
+$req->bindParam(':titre', $titre);
+$req->bindParam(':description', $description);
+$req->bindParam(':duree', $duree);
+$req->bindParam(':cout', $cout);
+$req->bindParam(':commentaire', $commentaire);
+$req->bindParam(':support', $support);
+$req->bindParam(':lieu', $lieu);
 $req->bindParam(':id', $id);
 $req->execute();
 

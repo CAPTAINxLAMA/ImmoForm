@@ -2,31 +2,30 @@
 include '../includes/header.php';
 
 require '../includes/auth.php';
-
 requireRole('admin');
-
-include_once('../includes/config.php');
 
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
 $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-
-if (!$id) {
+if (!$id)
+{
     http_response_code(404);
     die("ID manquant ou invalide");
 }
 
 // Connexion à la base de données
+include_once('../includes/config.php');
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req=$pdo->prepare("SELECT * FROM conseil WHERE Id=:id");
+// Envoie de la requête SQL
+$req = $pdo->prepare("SELECT * FROM conseil WHERE Id=:id");
 $req->bindParam(':id', $id);
 $req->execute();
 
-$conseil=$req->fetchAll();
+$conseil = $req->fetchAll();
 
-// vérification que j'en ai bien récupéré une seule
+// vérification de l'unicité du conseil
 if(count($conseil)!=1){
     http_response_code(404);
     die("Pas de conseil pour l'id ".$id);
@@ -63,7 +62,7 @@ if(count($conseil)!=1){
         <input type="hidden" name="token" value="<?php echo $token; ?>">
 
         <button type="submit" class="btn3">Enregistrer</button>
-        <a href="mes_creations.php" class="btn">Annuler</a>
+        <a href="./mes_creations.php" class="btn">Annuler</a>
     </form>
 </div>
 

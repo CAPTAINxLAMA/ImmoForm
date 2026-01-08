@@ -1,16 +1,15 @@
 <?php
-
 session_start();
-
-include_once "../includes/config.php";
-
-$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 $tokenmail = filter_input(INPUT_GET, 'token', FILTER_DEFAULT);
 
+// Connexion à la base de données
+include_once "../includes/config.php";
+$pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
+
+// Envoie de la requête SQL
 $req = $pdo->prepare("SELECT id, email, reset_token FROM users WHERE reset_token = :reset_token AND reset_token_expiry > NOW()");
 $req->bindParam(':reset_token', $tokenmail);
-
 $req->execute();
 
 if ($req->fetch()) {

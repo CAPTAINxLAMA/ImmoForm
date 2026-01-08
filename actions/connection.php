@@ -1,22 +1,23 @@
 <?php
-
 session_start();
 $tokenServeur = $_SESSION['token'];
-$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
+$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_VALIDATE_INT);
 
-//Je vérifie la cohérence des tokens
-if ($tokenRecu != $tokenServeur) {
-    die("Erreur de token. Vas mourir vilain hacker");//je stop tout
+// Vérification la cohérence des tokens
+if($tokenRecu != $tokenServeur)
+{
+    die("Erreur de token. Va mourir vilain hacker.");
 }
 
 // Récupération des données de login
 $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 
-// Interrogation de la base de donnée
+// Connexion à la base de données
 include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
+// Envoie de la requête SQL
 $reqContact = $pdo->prepare("SELECT mdp, Id FROM contact WHERE Email = :email");
 $reqAdmin = $pdo->prepare("SELECT mdp, Id FROM formateur WHERE Email = :email");
 $reqContact->bindParam(':email', $email);

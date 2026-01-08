@@ -1,24 +1,22 @@
 <?php
-
 include '../includes/header.php';
 
 require '../includes/auth.php';
-
 requireRole('client');
 
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
+// Connexion à la base de données
 include_once "../includes/config.php";
-
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
+// Envoie de la requête SQL
 $req = $pdo->prepare("SELECT Nom, Prenom, Id FROM contact WHERE Email = :email");
 $req->bindparam(':email', $_SESSION['user']['email']);
 $req->execute();
 
 $contact = $req->fetchAll();
-
 ?>
 
 <main>
@@ -27,7 +25,7 @@ $contact = $req->fetchAll();
         <br>
         <form action="../actions/createDemande.php" method="POST">
             <label>Type de demande :</label>
-            <input type="text" required maxlength="100" name="type">
+            <input type="text" name="type" required maxlength="100">
 
             <label>Description détaillée de la demande (Sujet, Type, Commentaire éventuel...) :</label>
             <textarea name="description" rows="5" cols="50" required></textarea>
@@ -55,9 +53,8 @@ $contact = $req->fetchAll();
             <br>
             <br>
             <input class="btn3" type="submit" value="Envoyer">
-            <a href="navbar.php" class="btn">Accueil</a>
+            <a href="./navbar.php" class="btn">Accueil</a>
         </form>
-
     </div>
 </main>
 
