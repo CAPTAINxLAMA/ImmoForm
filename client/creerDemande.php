@@ -29,7 +29,7 @@ $contact = $req->fetchAll();
             <label>Type de demande :</label>
             <input type="text" required maxlength="100" name="type">
 
-            <label>Description de la demande :</label>
+            <label>Description détaillée de la demande (Sujet, Type, Commentaire éventuel...) :</label>
             <textarea name="description" rows="5" cols="50" required></textarea>
 
             <label>Contact de l'agence :</label>
