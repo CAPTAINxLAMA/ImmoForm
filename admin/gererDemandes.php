@@ -40,7 +40,7 @@ $_SESSION['token'] = $token;
                 <td><?php echo $conseil["Type"] ?></td>
                 <td><?php echo $conseil["Description"] ?></td>
                 <td><?php echo $conseil["Date"] ?></td>
-                <td><?php echo $conseil["Statut"] ?></td>
+                <td><?php if ($conseil["Statut"] == Null)  { echo "En attente"; } ?></td>
                 <td><?php if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }
                     else {
                         $req = $pdo->prepare("SELECT * FROM demandeconseil JOIN formateur ON Formateur_Id = formateur.Id WHERE demandeconseil.Id=:Id");
