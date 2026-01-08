@@ -8,7 +8,7 @@
 </head>
 <body>
 <header>
-    <h1><a href="/index.php" class="immo">ImmoForm</a></h1>
+    <h1><a href="/ImmoForm/index.php" class="immo">ImmoForm</a></h1>
 
     <p>Plateforme de demande de formation et conseil</p>
 </header>
