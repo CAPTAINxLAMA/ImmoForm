@@ -7,10 +7,12 @@ requireRole('admin');
 include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("SELECT * FROM conseil LEFT JOIN formateur ON conseil.formateur_id = formateur.id");
+$req = $pdo->prepare("SELECT conseil.Id AS conseilId, conseil.Titre, conseil.Description, conseil.Duree, conseil.Date, conseil.Lieu, conseil.Support, conseil.Cout, conseil.Commentaire, formateur.Nom, formateur.Prenom FROM conseil LEFT JOIN formateur ON conseil.formateur_id = formateur.id");
 $req->execute();
 
 $conseils = $req->fetchAll();
+
+var_dump($conseils);
 
 ?>
 
@@ -44,10 +46,10 @@ $conseils = $req->fetchAll();
                 <td><?php echo $conseil["Commentaire"] ?></td>
                 <td><?php echo $conseil["Nom"].' '.$conseil["Prenom"] ?></td>
                 <td>
-                    <a href="modifierConseil.php?id=<?php echo $conseil["Id"] ?>" class="btn1">Modifier</a>
+                    <a href="modifierConseil.php?id=<?php echo $conseil["conseilId"] ?>" class="btn1">Modifier</a>
                 </td>
                 <td>
-                    <a href="supprimerConseil.php?id=<?php echo $conseil["Id"] ?>" class="btn2">Supprimer</a>
+                    <a href="supprimerConseil.php?id=<?php echo $conseil["conseilId"] ?>" class="btn2">Supprimer</a>
                 </td>
             </tr>
             <?php
@@ -62,4 +64,3 @@ $conseils = $req->fetchAll();
 </div>
 
 <?php  include '../includes/footer.php'?>
-
