@@ -18,12 +18,11 @@ $_SESSION['token'] = $token;
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
             <button class="btn3" type="submit">Se connecter</button>
-            <a class='btn' href="oublieMDP.php">Mot de passe oublié ?</a>
+            <a class='btn' href="./oublieMDP.php">Mot de passe oublié ?</a>
         </form>
 
-
         <p style="margin-top: 20px;">
-            Pas encore de compte ? <a class='btn' href="inscription.php">Créer un compte</a>
+            Pas encore de compte ? <a class='btn' href="./inscription.php">Créer un compte</a>
         </p>
     </div>
 </main>

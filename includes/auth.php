@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+// Vérification si l'utilisateur est bien connecté
 function requireLogin() {
     if (!isset($_SESSION['user'])) {
         header('Location: login.php');
@@ -8,6 +9,7 @@ function requireLogin() {
     }
 }
 
+// Vérification que l'utilisateur est bien à sa place
 function requireRole($role) {
     requireLogin();
 
