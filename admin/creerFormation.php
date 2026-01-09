@@ -18,7 +18,7 @@ if ($standard)
             <h2>Une formation standard :</h2>
             <a href="./creerFormation.php?id=<?php echo $id ?>&standard=0" class='btn'>En ligne</a>
             <br>
-            <form method="POST" action="../actions/createFormationS.php">
+            <form method="POST" action="../actions/createFormation.php">
                 <label>Titre :</label>
                 <input type="text" name="titre" maxlength="50" required>
 
@@ -86,6 +86,8 @@ if ($standard)
                 <label>Support de formation (lien) :</label>
                 <input type="text" name="support" placeholder="Facultatif">
 
+                <input type="hidden" name="standard" value="1">
+
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
 
                 <input type="hidden" name="token" value="<?php echo $token; ?>">
@@ -106,7 +108,7 @@ else {
             <a href="./creerFormation.php?id=<?php echo $id ?>&standard=1" class='btn'>Standard</a>
 
             <br>
-            <form method="POST" action="../actions/createFormationO.php">
+            <form method="POST" action="../actions/createFormation.php">
                 <label>Titre :</label>
                 <input type="text" name="titre" maxlength="50" required>
 
@@ -152,6 +154,8 @@ else {
 
                 <label>Secteur :</label>
                 <input type="text" name="secteur" required>
+
+                <input type="hidden" name="standard" value="0">
 
                 <input type="hidden" name="id" value="<?php echo $id; ?>">
 
