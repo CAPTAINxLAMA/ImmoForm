@@ -58,7 +58,7 @@ $demandeconseil = $req->fetchAll();
                         echo '<a href="./creerConseil.php?id="'.$conseil["Id"].' class="btn3">Créer un Nouveau Conseil</a>';
                     }
                     else if ($conseil["Type"] == "Formation") {
-                        echo '<a href="./creerFormation.php?id="'.$conseil["Id"].' class="btn3">Créer une Nouvelle Formation</a>';
+                        echo '<a href="./creerFormation.php?id='.$conseil["Id"].'&standard=1" class="btn3">Créer une Nouvelle Formation</a>';
                     }
                     ?>
                 </td>
