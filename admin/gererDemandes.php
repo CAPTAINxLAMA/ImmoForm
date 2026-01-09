@@ -15,7 +15,7 @@ $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, confi
 $req = $pdo->prepare("SELECT * FROM demandeconseil");
 $req->execute();
 
-$conseils = $req->fetchAll();
+$demandeconseil = $req->fetchAll();
 ?>
 
 <div class="container">
@@ -32,7 +32,7 @@ $conseils = $req->fetchAll();
             <th></th>
         </tr>
         <?php
-        foreach ($conseils as $conseil)
+        foreach ($demandeconseil as $conseil)
         {
             ?>
             <tr>
@@ -54,7 +54,13 @@ $conseils = $req->fetchAll();
                     ?>
                 </td>
                 <td>
-                    <a href="./creerConseil.php?id="<?php echo $conseil["Id"] ?> class="btn3">Créer un Nouveau Conseil</a>
+                    <?php if ($conseil["Type"] == "Conseil") {
+                        echo '<a href="./creerConseil.php?id="'.$conseil["Id"].' class="btn3">Créer un Nouveau Conseil</a>';
+                    }
+                    else if ($conseil["Type"] == "Formation") {
+                        echo '<a href="./creerFormation.php?id="'.$conseil["Id"].' class="btn3">Créer une Nouvelle Formation</a>';
+                    }
+                    ?>
                 </td>
                 <td>
                     <form action="../actions/acceptDemande.php" method="POST">

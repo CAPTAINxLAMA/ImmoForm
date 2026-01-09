@@ -34,13 +34,17 @@ $conseils = $req->fetchAll();
                 <td><?php echo $conseil["Date"] ?></td>
                 <td><?php echo $conseil["Statut"] ?></td>
                 <td>
-                    <a href="demande_validee.php?id=<?php echo $conseil["Id"] ?>" class="btn">Détails</a>
+                    <?php if ($conseil["Statut"] == "Accepté") {
+                        echo '<a href="demande_validee.php?id='.$conseil["Id"].'" class="btn">Détails</a>';
+                    } ?>
                 </td>
+                    <?php if ($conseil["Statut"] == "En attente") { ?>
                 <td>
-                    <a href="modifierDemande.php?id=<?php echo $conseil["Id"] ?>" class="btn1">Modifier</a>
-                </td>
+                        <?php echo '<a href="modifierDemande.php?id='. $conseil["Id"].'" class="btn1">Modifier</a>';?>
                 <td>
-                    <a href="supprimerDemande.php?id=<?php echo $conseil["Id"] ?>" class="btn2">Supprimer</a>
+                    <?php echo '<a href="supprimerDemande.php?id='.$conseil["Id"].' ?>" class="btn2">Supprimer</a>';
+                    }
+                    ?>
                 </td>
             </tr>
             <?php
