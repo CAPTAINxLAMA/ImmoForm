@@ -1,21 +1,23 @@
 <?php
-
 session_start();
 $tokenServeur = $_SESSION['token'];
-$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
+$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_VALIDATE_INT);
 
-//Je vérifie la cohérence des tokens
-if ($tokenRecu != $tokenServeur) {
-    die("Erreur de token. Vas mourir vilain hacker");//je stop tout
+// Vérification la cohérence des tokens
+if($tokenRecu != $tokenServeur)
+{
+    die("Erreur de token. Va mourir vilain hacker.");
 }
 
 $email = filter_input(INPUT_POST, 'email', FILTER_DEFAULT);
 $password = filter_input(INPUT_POST, 'password', FILTER_DEFAULT);
 $confirm_password = filter_input(INPUT_POST, 'confirm_password', FILTER_DEFAULT);
 
+// Connexion à la base de données
 include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
+// Envoie de la requête SQL
 $reqContact = $pdo->prepare("SELECT * FROM contact WHERE Email = :email");
 $reqAdmin = $pdo->prepare("SELECT * FROM formateur WHERE Email = :email");
 $reqContact->bindParam(':email', $email);
@@ -30,17 +32,20 @@ if ($emailContactExiste[0]["Email"] == $email && $password == $confirm_password 
 {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    // Envoie de la requête SQL
     $req = $pdo->prepare("UPDATE contact SET mdp = :password WHERE Email = :email");
     $req->bindParam(':password', $hashedPassword);
     $req->bindParam(':email', $emailContactExiste[0]["Email"]);
     $req->execute();
 
-    header("Location: /ImmoForm/includes/connexion.php"); // à changer, et mettre la page post-connection
+    header("Location: /ImmoForm/includes/connexion.php");
 }
+
 else if ($emailAdminExiste[0]["Email"] == $email && $password == $confirm_password && $emailAdminExiste[0]["mdp"] == NULL)
 {
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    // Envoie de la requête SQL
     $req = $pdo->prepare("UPDATE formateur SET mdp = :password WHERE Email = :email");
     $req->bindParam(':password', $hashedPassword);
     $req->bindParam(':email', $emailAdminExiste[0]["Email"]);

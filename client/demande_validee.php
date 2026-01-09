@@ -1,23 +1,26 @@
 <?php
-
 include '../includes/header.php';
 
 require '../includes/auth.php';
-
 requireRole('client');
 
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
+$id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
+if (!$id)
+{
+    http_response_code(404);
+    die("ID manquant ou invalide");
+}
+
+// Connexion à la base de données
 include_once "../includes/config.php";
-
-$Id=filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-
 $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("SELECT * FROM conseil LEFT JOIN formateur ON conseil.Formateur_ID = formateur.Id WHERE Demande_Id = :Id");
-$req->bindParam(':Id', $Id);
-
+// Envoie de la requête SQL
+$req = $pdo->prepare("SELECT * FROM conseil LEFT JOIN formateur ON conseil.Formateur_ID = formateur.Id WHERE Demande_Id = :id");
+$req->bindParam(':id', $id);
 $req->execute();
 
 $demandes = $req->fetchAll();
@@ -28,12 +31,12 @@ $demandes = $req->fetchAll();
 
     <table>
         <tr>
-            <th>Titre </th>
-            <th>Description </th>
+            <th>Titre</th>
+            <th>Description</th>
             <th>Durée</th>
-            <th>Date </th>
-            <th>Lieu </th>
-            <th>Support </th>
+            <th>Date</th>
+            <th>Lieu</th>
+            <th>Support</th>
             <th>Coût</th>
             <th>Commentaire</th>
             <th>Formateur</th>
@@ -59,10 +62,10 @@ $demandes = $req->fetchAll();
     </table>
     <tr>
         <td>
-            <a href="mes_demandes.php" class="btn">Retour</a>
+            <a href="./mes_demandes.php" class="btn">Retour</a>
         </td>
         <td>
-            <a href="navbar.php" class='btn' >Accueil</a>
+            <a href="./navbar.php" class='btn' >Accueil</a>
         </td>
     </tr>
 </div>

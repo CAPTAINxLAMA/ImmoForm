@@ -1,23 +1,25 @@
 <?php
 session_start();
-$tokenServeur= $_SESSION['token'];
-$tokenRecu=filter_input(INPUT_POST, 'token', FILTER_DEFAULT);
+$tokenServeur = $_SESSION['token'];
+$tokenRecu = filter_input(INPUT_POST, 'token', FILTER_VALIDATE_INT);
 
-//je vérifie la cohérence des tokens
-if($tokenRecu != $tokenServeur){
-    die("Erreur de token. Va mourir vilain hacker.");//je stoppe tout
+// Vérification la cohérence des tokens
+if($tokenRecu != $tokenServeur)
+{
+    die("Erreur de token. Va mourir vilain hacker.");
 }
 
-$Id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-$Rejet = filter_input(INPUT_POST, 'formateur_id', FILTER_DEFAULT);
+$id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
+$rejet = filter_input(INPUT_POST, 'formateur_id', FILTER_VALIDATE_INT);
 
+// Connexion à la base de données
 include "../includes/config.php";
-
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req=$pdo->prepare('update demandeconseil set Statut="Refusé", Formateur_Id=:Rejet where Id=:Id');
-$req->bindParam(':Id', $Id);
-$req->bindParam(':Rejet', $Rejet);
+// Envoie de la requête SQL
+$req = $pdo->prepare('update demandeconseil set Statut="Refusé", Formateur_Id=:rejet where Id=:id');
+$req->bindParam(':id', $id);
+$req->bindParam(':rejet', $rejet);
 
 $req->execute();
 

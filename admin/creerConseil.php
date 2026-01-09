@@ -1,13 +1,13 @@
-<?php include "../includes/header.php";
+<?php
+include "../includes/header.php";
 
 require '../includes/auth.php';
-
 requireRole('admin');
 
 $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
-$Id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 ?>
 
 <main>
@@ -22,7 +22,7 @@ $Id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
             <input type="text" name="description" required>
 
             <label>Durée :</label>
-            <input type="number" name="duree" placeholder="En heure" required>
+            <input type="number" name="duree" placeholder="En heures" required>
 
             <label>Coût :</label>
             <input type="number" step="0.01" name="cout" placeholder="En euro" required>
@@ -40,26 +40,28 @@ $Id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
             <select name="formateur_id" required>
                 <option>-- Choisissez un formateur --</option>
                 <?php
+                // Connexion à la base de données
                 include_once "../includes/config.php";
-
                 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
+                // Envoie de la requête SQL
                 $req = $pdo->prepare("SELECT * FROM formateur");
                 $req->execute();
 
                 $formateur = $req->fetchAll();
+
                 for ($i = 0; $i < count($formateur); $i++) {
                     echo '<option value="' . $formateur[$i]['Id'] . '">' . htmlentities($formateur[$i]['Nom']) . ' ' . htmlentities($formateur[$i]['Prenom']) . '</option>';
                 }
                 ?>
             </select>
 
-            <input type="hidden" name="id" value="<?php echo $Id; ?>">
+            <input type="hidden" name="id" value="<?php echo $id; ?>">
 
             <input type="hidden" name="token" value="<?php echo $token; ?>">
 
             <button class="btn3" type="submit" >Créer le conseil</button>
-            <a href="gererDemandes.php" class='btn'>Annuler</a>
+            <a href="./gererDemandes.php" class='btn'>Annuler</a>
         </form>
     </div>
 </main>
