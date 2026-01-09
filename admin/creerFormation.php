@@ -52,8 +52,12 @@ if ($standard)
                 <input type="number" name="capacite" required>
 
                 <label>Formateurs (2 ou plus):</label>
-                <select name="formateur_id" required multiple>
+                <br>
+                <i><small>Maintenez CTRL (ou CMD sur Mac) pour sélectionner plusieurs formateurs</small></i>
+
+                <select name="formateur_id[]" required multiple>
                     <option>-- Choisissez plusieurs formateurs --</option>
+
                     <?php
                     // Connexion à la base de données
                     include_once "../includes/config.php";
@@ -92,7 +96,7 @@ if ($standard)
 
                 <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-                <button class="btn3" type="submit" >Créer le conseil</button>
+                <button class="btn3" type="submit" >Créer la formation</button>
                 <a href="./gererDemandes.php" class='btn'>Annuler</a>
             </form>
         </div>
@@ -161,7 +165,7 @@ else {
 
                 <input type="hidden" name="token" value="<?php echo $token; ?>">
 
-                <button class="btn3" type="submit" >Créer le conseil</button>
+                <button class="btn3" type="submit" >Créer la formation</button>
                 <a href="./gererDemandes.php" class='btn'>Annuler</a>
             </form>
         </div>
