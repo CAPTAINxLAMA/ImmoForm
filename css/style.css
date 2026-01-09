@@ -71,6 +71,7 @@ header {
 
 input {
     all : unset;
+    max-width: 1238px;
 }
 
 input[type="email"],
