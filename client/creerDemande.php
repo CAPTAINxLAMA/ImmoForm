@@ -27,7 +27,7 @@ $contact = $req->fetchAll();
         <br>
         <form action="../actions/createDemande.php" method="POST">
             <label>Type de demande :</label>
-            <select required name="Type">
+            <select required name="type">
                 <option value="">-- Sélectionnez --</option>
                 <option value="Conseil">Conseil</option>
                 <option value="Formation">Formation</option>
