@@ -36,13 +36,23 @@ if(count($demandeconseil)!=1){
 ?>
 
 <div class="container">
-    <h2>supprimer la demande :</h2>
+    <h2>Supprimer la demande :</h2>
     <br>
     <form action="../actions/deleteDemande.php" method="post">
-        <br> <label>Titre :<?php echo htmlentities($demandeconseil[0]["Type"]) ?></label>
-
-      <br> <label>Description :   <?php echo htmlentities($demandeconseil[0]["Description"]) ?></label>
-
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Statut</th>
+            </tr>
+            <tr>
+                <td><?php echo htmlentities($demandeconseil[0]["Type"]) ?></td>
+                <td><?php echo htmlentities($demandeconseil[0]["Description"]) ?></td>
+                <td><?php echo htmlentities($demandeconseil[0]["Date"]) ?></td>
+                <td><?php echo htmlentities($demandeconseil[0]["Statut"]) ?></td>
+            </tr>
+        </table>
 
         <br> <input type="hidden" name="Id" value="<?php echo $Id ?>"/>
         <input type="hidden" name="token" value="<?php echo $token; ?>">

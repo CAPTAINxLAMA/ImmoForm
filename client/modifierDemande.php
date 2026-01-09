@@ -39,8 +39,11 @@ if(count($demandeconseil)!=1){
     <h2>Modifier la demande :</h2>
     <br>
     <form action="../actions/updateDemande.php" method="post">
-        <label>Type :</label>
-        <input type="text" value="<?php echo htmlentities($demandeconseil[0]["Type"]) ?>" name="Type" required maxlength="50">
+        <label>Type de demande :</label>
+        <select required name="Type">
+            <option value="Conseil" <?php echo ($demandeconseil[0]["Type"] == "Conseil") ? "selected" : ""; ?>>Conseil</option>
+            <option value="Formation" <?php echo ($demandeconseil[0]["Type"] == "Formation") ? "selected" : ""; ?>>Formation</option>
+        </select>
 
         <label>Description :</label>
         <textarea name="Description" rows="4"><?php echo htmlentities($demandeconseil[0]["Description"]) ?></textarea>

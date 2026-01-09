@@ -27,7 +27,11 @@ $contact = $req->fetchAll();
         <br>
         <form action="../actions/createDemande.php" method="POST">
             <label>Type de demande :</label>
-            <input type="text" required maxlength="100" name="type">
+            <select required name="Type">
+                <option value="">-- Sélectionnez --</option>
+                <option value="Conseil">Conseil</option>
+                <option value="Formation">Formation</option>
+            </select>
 
             <label>Description détaillée de la demande (Sujet, Type, Commentaire éventuel...) :</label>
             <textarea name="description" rows="5" cols="50" required></textarea>
