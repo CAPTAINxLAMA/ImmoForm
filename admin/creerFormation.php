@@ -1,14 +1,8 @@
 <?php
 include "../includes/header.php";
 
-require '../includes/auth.php';
-requireRole('admin');
 
-$token = rand(0, 1000000);
-$_SESSION['token'] = $token;
-
-$id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
-$standard = filter_input(INPUT_GET, 'standard', FILTER_VALIDATE_INT);
+$standard = 1;
 
 if ($standard)
 {
