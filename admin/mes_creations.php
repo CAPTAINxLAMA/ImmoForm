@@ -19,8 +19,9 @@ $req->execute();
 
 $formationsS = $req->fetchAll();
 
-$reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM `association_standard/formateur` JOIN formateur ON `association_standard/formateur`.Formateur_id = formateur.Id WHERE `association_standard/formateur`.Standard_id = :Standard_id");
-$reqLink->bindParam( ':Standard_id', $formationsS["Id"]);
+$formationsS_id = $formationsS["Id"];
+$reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM association_standard JOIN formateur ON association_standard.Formateur_id = formateur.Id WHERE association_standard.Standard_id = :Standard_id");
+$reqLink->bindParam( ':Standard_id', $formationsS_id);
 $reqLink->execute();
 
 $formateurs = $reqLink->fetchAll();
@@ -29,6 +30,7 @@ $req = $pdo->prepare("SELECT * FROM online");
 $req->execute();
 
 $formations = $req->fetchAll();
+
 ?>
 
 <div class="container">
@@ -157,7 +159,7 @@ $formations = $req->fetchAll();
                 <td><?php echo $formation["Secteur"] ?></td>
                 <td><?php echo $formation["DateHeure"] ?></td>
                 <td><?php echo $formation["URL"] ?></td>
-                <td><?php echo $formateur["Nom"].' '.$formateur["Prenom"] ?></td>
+                <td><?php echo $formateur[0]["Nom"].' '.$formateur[0]["Prenom"] ?></td>
                 <td>
                     <a href="./modifierFormation.php?id=<?php echo $formation["Id"] ?>&standard=0" class="btn1">Modifier</a>
                 </td>

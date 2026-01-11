@@ -92,12 +92,11 @@ else
         die("Pas de demande de formation pour l'id ".$id);
     }
 
-    $req = $pdo->prepare("SELECT * FROM formateur WHERE Id = :formateur_id");
-    $req->bindParam(':formateur_id', $online["Formateur_Id"]);
+    $req = $pdo->prepare("SELECT Nom, Prenom FROM formateur WHERE Id = :formateur_id");
+    $req->bindParam(':formateur_id', $online[0]["Formateur_Id"]);
     $req->execute();
 
     $formateur = $req->fetchAll();
-
     ?>
     <div class="container">
         <h2>Supprimer la formation :</h2>
@@ -111,7 +110,7 @@ else
             <label><b>Secteur</b> <?php echo htmlentities($online[0]["Secteur"]) ?></label><br><br>
             <label><b>Horaire</b> <?php echo htmlentities($online[0]["DateHeure"]) ?></label><br><br>
             <label><b>Lien</b> <?php echo htmlentities($online[0]["URL"]) ?></label><br><br>
-            <label><b>Formateur</b> <?php echo htmlentities($formateur["Nom"]).' '.htmlentities($formateur["Prenom"]); ?></label><br><br>
+            <label><b>Formateur</b> <?php echo htmlentities($formateur[0]["Nom"]).' '.htmlentities($formateur[0]["Prenom"]); ?></label><br><br>
 
             <br> <input type="hidden" name="id" value="<?php echo $id ?>"/>
             <br> <input type="hidden" name="standard" value="0"/>
