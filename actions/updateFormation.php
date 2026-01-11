@@ -82,7 +82,7 @@ else {
     $url = filter_input(INPUT_POST, 'url', FILTER_DEFAULT);
     $formateur  = filter_input(INPUT_POST, 'formateur_id', FILTER_VALIDATE_INT);
 
-    $req = $pdo->prepare("UPDATE online SET Titre = :titre, Description = :description, Duree = :duree, Niveau = :niveau, Secteur = :secteur, DateHeure = :dateheure, URL = :url, Formateur_Id = :formateur_id");
+    $req = $pdo->prepare("UPDATE online SET Titre = :titre, Description = :description, Duree = :duree, Niveau = :niveau, DateHeure = :dateheure, URL = :url, Formateur_Id = :formateur_id, Secteur = :secteur WHERE Id = :id");
     $req->bindParam(':id', $id);
     $req->bindParam(':titre', $titre);
     $req->bindParam(':description', $description);

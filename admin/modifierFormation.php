@@ -163,18 +163,18 @@ else
             <input type="number" name="duree" placeholder="En heures" required value="<?php echo htmlentities($online[0]["Duree"]) ?>">
 
             <label>Niveau :</label>
-            <select name="niveau" required value="<?php echo htmlentities($online[0]["Niveau"]) ?>">
+            <select name="niveau" required>
                 <option>-- Définissez un niveau d'expertise --</option>
-                <option value="debutant">débutant</option>
-                <option value="intermediaire">intermédiaire</option>
-                <option value="avance">avancé</option>
+                <option value="debutant" <?php if ($online[0]["Niveau"] == "debutant") { echo "selected"; }?>>débutant</option>
+                <option value="intermediaire" <?php if ($online[0]["Niveau"] == "intermediaire") { echo "selected"; }?>>intermédiaire</option>
+                <option value="avance" <?php if ($online[0]["Niveau"] == "avance") { echo "selected"; }?>>avancé</option>
             </select>
 
             <label>Date et heure :</label>
-            <input type="datetime-local" name="dateheure" required value="<?php echo htmlentities($online[0]["Secteur"]) ?>">
+            <input type="datetime-local" name="dateheure" required value="<?php echo htmlentities($online[0]["DateHeure"]) ?>">
 
             <label>Lien (URL) :</label>
-            <input type="url" name="url" required value="<?php echo htmlentities($online[0]["DateHeure"]) ?>">
+            <input type="url" name="url" required value="<?php echo htmlentities($online[0]["URL"]) ?>">
 
             <label>Formateur:</label>
             <select name="formateur_id" required>
@@ -189,15 +189,16 @@ else
                 $req->execute();
 
                 $formateur = $req->fetchAll();
-
                 for ($i = 0; $i < count($formateur); $i++) {
-                    echo '<option value="' . $formateur[$i]['Id'] . '">' . htmlentities($formateur[$i]['Nom']) . ' ' . htmlentities($formateur[$i]['Prenom']) . '</option>';
+                    if ($formateur[$i]['Id'] == $online[0]["Formateur_Id"]) { $form = "selected"; } else { $form = ""; }
+
+                    echo '<option '.$form.' value="' . $formateur[$i]['Id'] . '">' . htmlentities($formateur[$i]['Nom']) . ' ' . htmlentities($formateur[$i]['Prenom']) . '</option>';
                 }
                 ?>
             </select>
 
             <label>Secteur :</label>
-            <input type="text" name="secteur" required value="<?php echo htmlentities($online[0]["URL"]) ?>">
+            <input type="text" name="secteur" required value="<?php echo htmlentities($online[0]["Secteur"]) ?>">
             <input type="hidden" name="standard" value="0">
 
             <input type="hidden" name="id" value="<?php echo $id ?>"/>

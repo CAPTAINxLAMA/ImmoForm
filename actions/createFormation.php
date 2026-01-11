@@ -61,7 +61,7 @@ if ($standard === 1) {
     $formationId = intval($pdo->lastInsertId());
 
     /* Liaison formateurs */
-    $reqLink = $pdo->prepare("INSERT INTO `association_standard/formateur` (Standard_id, Formateur_id) VALUES (:formation_id, :formateur_id)");
+    $reqLink = $pdo->prepare("INSERT INTO association_standard (Standard_id, Formateur_id) VALUES (:formation_id, :formateur_id)");
 
     foreach ($formateurs as $formateurId) {
         $formateurId = intval($formateurId);
