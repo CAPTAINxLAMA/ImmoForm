@@ -58,20 +58,16 @@ if ($standard === 1) {
     $req->bindParam(':support', $support);
     $req->execute();
 
-    // Récupération de l'id de la dernière requete
-    $formationId = intval($pdo->lastInsertId());
-
-
     /* Liaison formateurs */
-    $reqLink = $pdo->prepare("DELETE FROM `association_standard/formateur` WHERE formation_id = :formation_id");
-    $reqLink->bindParam(':formation_id', $formationId);
+    $reqLink = $pdo->prepare("DELETE FROM association_standard WHERE Standard_Id = :formation_id");
+    $reqLink->bindParam(':formation_id', $id);
     $reqLink->execute();
 
-    $reqLink = $pdo->prepare("INSERT INTO `association_standard/formateur` (Standard_id, Formateur_id) VALUES (:formation_id, :formateur_id)");
+    $reqLink = $pdo->prepare("INSERT INTO association_standard (Standard_id, Formateur_id) VALUES (:formation_id, :formateur_id)");
 
     foreach ($formateurs as $formateurId) {
         $formateurId = intval($formateurId);
-        $reqLink->bindParam(':formation_id', $formationId);
+        $reqLink->bindParam(':formation_id', $id);
         $reqLink->bindParam(':formateur_id', $formateurId);
         $reqLink->execute();
     }

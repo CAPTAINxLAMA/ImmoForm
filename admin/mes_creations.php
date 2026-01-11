@@ -19,13 +19,6 @@ $req->execute();
 
 $formationsS = $req->fetchAll();
 
-$formationsS_id = $formationsS["Id"];
-$reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM association_standard JOIN formateur ON association_standard.Formateur_id = formateur.Id WHERE association_standard.Standard_id = :Standard_id");
-$reqLink->bindParam( ':Standard_id', $formationsS_id);
-$reqLink->execute();
-
-$formateurs = $reqLink->fetchAll();
-
 $req = $pdo->prepare("SELECT * FROM online");
 $req->execute();
 
@@ -95,6 +88,11 @@ $formations = $req->fetchAll();
         <?php
         foreach ($formationsS as $formationS)
         {
+            $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM association_standard JOIN formateur ON association_standard.Formateur_id = formateur.Id WHERE association_standard.Standard_id = :Standard_id");
+            $reqLink->bindParam( ':Standard_id', $formationS["Id"]);
+            $reqLink->execute();
+
+            $formateurs = $reqLink->fetchAll();
             ?>
             <tr>
                 <td><?php echo $formationS["Titre"] ?></td>
@@ -109,7 +107,7 @@ $formations = $req->fetchAll();
                 <td>
                     <?php foreach ($formateurs as $formateur)
                     {
-                        echo $formateur["Nom"].' '.$formateur["Prenom"];
+                        echo $formateur["Nom"].' '.$formateur["Prenom"].'<br>';
                     }
                     ?>
                 </td>

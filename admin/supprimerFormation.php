@@ -57,7 +57,7 @@ if ($standard_oupas)
                 $formateurs = $reqLink->fetchAll();
                 foreach ($formateurs as $formateur)
                 {
-                    echo htmlentities($formateur["Nom"]).' '.htmlentities($formateur["Prenom"]);
+                    echo htmlentities($formateur["Nom"]).' '.htmlentities($formateur["Prenom"]).'  ';
                 }
                 ?>
             </label><br><br>
