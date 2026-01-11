@@ -119,10 +119,10 @@ $formations = $req->fetchAll();
                 <td><?php echo $formationS["Commentaire"] ?></td>
                 <td><?php echo $formationS["Support"] ?></td>
                 <td>
-                    <a href="./modifierFormation.php?id=<?php echo $formationS["formationId"] ?>&standard=1" class="btn1">Modifier</a>
+                    <a href="./modifierFormation.php?id=<?php echo $formationS["Id"] ?>&standard=1" class="btn1">Modifier</a>
                 </td>
                 <td>
-                    <a href="./supprimerFormation.php?id=<?php echo $formationS["foramtionId"] ?>&standard=1" class="btn2">Supprimer</a>
+                    <a href="./supprimerFormation.php?id=<?php echo $formationS["Id"] ?>&standard=1" class="btn2">Supprimer</a>
                 </td>
             </tr>
             <?php

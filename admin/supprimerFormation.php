@@ -50,7 +50,7 @@ if ($standard_oupas)
             <label><b>Capacité d'accueil</b> <?php echo htmlentities($standard[0]["Capacite"]) ?></label><br><br>
             <label><b>Formateurs</b>
                 <?php
-                $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM `association_standard/formateur` JOIN formateur ON `association_standard/formateur`.Formateur_id = formateur.Id WHERE `association_standard/formateur`.Standard_id = :Standard_id");
+                $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM association_standard JOIN formateur ON association_standard.Formateur_id = formateur.Id WHERE association_standard.Standard_id = :Standard_id");
                 $reqLink->bindParam( ':Standard_id', $id);
                 $reqLink->execute();
 
