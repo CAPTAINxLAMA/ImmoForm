@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : lun. 15 déc. 2025 à 15:41
+-- Généré le : dim. 11 jan. 2026 à 17:31
 -- Version du serveur : 10.4.32-MariaDB
 -- Version de PHP : 8.2.12
 
@@ -58,21 +58,10 @@ INSERT INTO `agence` (`Id`, `Nom`, `Adresse`, `Telephone`, `ContactPrincipal_Id`
 -- --------------------------------------------------------
 
 --
--- Structure de la table `association_conseil/formateur`
+-- Structure de la table `associationinscription`
 --
 
-CREATE TABLE `association_conseil/formateur` (
-  `Formateur_id` int(11) NOT NULL,
-  `Conseil_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `association_inscription/agence`
---
-
-CREATE TABLE `association_inscription/agence` (
+CREATE TABLE `associationinscription` (
   `Agence_id` int(11) NOT NULL,
   `Inscription_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -80,10 +69,10 @@ CREATE TABLE `association_inscription/agence` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `association_inscription/contact`
+-- Structure de la table `associationinscription1`
 --
 
-CREATE TABLE `association_inscription/contact` (
+CREATE TABLE `associationinscription1` (
   `Contact_id` int(11) DEFAULT NULL,
   `Inscription_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -91,10 +80,21 @@ CREATE TABLE `association_inscription/contact` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `association_inscription/online`
+-- Structure de la table `association_conseil`
 --
 
-CREATE TABLE `association_inscription/online` (
+CREATE TABLE `association_conseil` (
+  `Formateur_id` int(11) NOT NULL,
+  `Conseil_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `association_inscription2`
+--
+
+CREATE TABLE `association_inscription2` (
   `Inscription_id` int(11) NOT NULL,
   `Formation_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -102,32 +102,29 @@ CREATE TABLE `association_inscription/online` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `association_inscription/standard`
+-- Structure de la table `association_standard`
 --
 
-CREATE TABLE `association_inscription/standard` (
-  `Inscription_id` int(11) NOT NULL,
-  `Formation_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `association_standard/formateur`
---
-
-CREATE TABLE `association_standard/formateur` (
+CREATE TABLE `association_standard` (
   `Formateur_id` int(11) DEFAULT NULL,
   `Standard_id` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Déchargement des données de la table `association_standard`
+--
+
+INSERT INTO `association_standard` (`Formateur_id`, `Standard_id`) VALUES
+(1, 6),
+(2, 6);
+
 -- --------------------------------------------------------
 
 --
--- Structure de la table `association_standard/inscription`
+-- Structure de la table `association_standard1`
 --
 
-CREATE TABLE `association_standard/inscription` (
+CREATE TABLE `association_standard1` (
   `Standard_id` int(11) NOT NULL,
   `Inscription_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -157,7 +154,7 @@ CREATE TABLE `conseil` (
 --
 
 INSERT INTO `conseil` (`Id`, `Titre`, `Description`, `Demande_Id`, `Duree`, `Date`, `Formateur_Id`, `Cout`, `Commentaire`, `Support`, `Lieu`) VALUES
-(1, 'TitreConseil', 'DescriptionConseil', 1, 120, '0000-00-00 00:00:00', 1, 500, 'CommentaireConseil', 'SupportConseil', 'LieuConseil');
+(1, 'TitreConseil', 'DescriptionConseil', 1, 1200, '0000-00-00 00:00:00', 1, 50, 'CommentaireConseil', 'SupportConseil', 'LieuConseil');
 
 -- --------------------------------------------------------
 
@@ -183,7 +180,7 @@ CREATE TABLE `contact` (
 --
 
 INSERT INTO `contact` (`Id`, `Nom`, `Prenom`, `Numero`, `Email`, `Fonction`, `PreferenceContact`, `Commentaire`, `Agence_Id`, `mdp`) VALUES
-(1, 'epsi', 'client', NULL, 'client@io', NULL, NULL, NULL, 0, '$2y$10$BGPt6rWB34IOUPp8WEMre.Mt2/FDViD84dnuTShzYXBQVWnUKRluq');
+(1, 'epsi', 'client', NULL, 'client@io', '', 'Email', '', 0, '$2y$10$dvAS/Zq4w1zoK0Xym1Lsr.Nb65qvUs6xHTxjfGBlVtZFr4wjUxIM2');
 
 -- --------------------------------------------------------
 
@@ -207,7 +204,14 @@ CREATE TABLE `demandeconseil` (
 --
 
 INSERT INTO `demandeconseil` (`Id`, `Agence_Id`, `Contact_Id`, `Type`, `Description`, `Date`, `Statut`, `Formateur_Id`) VALUES
-(1, 1, 1, 'TypeConseil', 'DescriptionConseil', '0000-00-00', 'En attente', NULL);
+(10, 1, 1, 'Conseil', 'Conseil PLS PLS PLS', '0000-00-00', 'Accepté', 1),
+(12, 1, 1, 'Conseil', 'Conseil PLS PLS PLS', '0000-00-00', 'Refusé', 1),
+(17, 1, 1, 'Conseil', 'dd', '2026-01-09', 'En attente', NULL),
+(18, 1, 1, 'Formation', 'aze', '2026-01-09', 'Accepté', 1),
+(19, 1, 1, 'Formation', 'je veux que ça marche', '2026-01-11', 'Accepté', 1),
+(20, 1, 1, 'Formation', 'là aussi', '2026-01-11', 'Accepté', 1),
+(21, 1, 1, 'Formation', 'encore', '2026-01-11', 'Accepté', 1),
+(22, 1, 1, 'Formation', 'et encore', '2026-01-11', 'Accepté', 1);
 
 -- --------------------------------------------------------
 
@@ -236,7 +240,8 @@ CREATE TABLE `formateur` (
 --
 
 INSERT INTO `formateur` (`Nom`, `Prenom`, `Numero`, `Id`, `Email`, `Specialite`, `AnneeExeprience`, `Commentaire`, `DebutCollab`, `FinCollab`, `Statut`, `Certification`, `mdp`) VALUES
-('epsi', 'admin', NULL, 1, 'admin@io', NULL, NULL, NULL, '0000-00-00', NULL, 0, NULL, '$2y$10$OR.6YK2hSJgpqNW7u2xK0.BoL67akts6QRVD4sgnuO5oW9QoP5c6S');
+('epsi', 'admin', NULL, 1, 'admin@io', NULL, NULL, NULL, '0000-00-00', NULL, 0, NULL, '$2y$10$h80k8y02ktJf.PthAlb4cO174RzGPeAgo/L/WTCse0uhn.DlWJZFm'),
+('epsi1', 'admin', NULL, 2, 'admin@io', NULL, NULL, NULL, '0000-00-00', NULL, 0, NULL, '$2y$10$h80k8y02ktJf.PthAlb4cO174RzGPeAgo/L/WTCse0uhn.DlWJZFm');
 
 -- --------------------------------------------------------
 
@@ -274,20 +279,21 @@ CREATE TABLE `online` (
   `Id` int(11) NOT NULL,
   `Titre` varchar(50) NOT NULL,
   `Description` text NOT NULL,
-  `Duree` datetime NOT NULL,
+  `Duree` int(11) NOT NULL,
   `Niveau` varchar(50) NOT NULL,
   `DateHeure` datetime NOT NULL,
   `URL` varchar(100) NOT NULL,
   `Formateur_Id` int(11) NOT NULL,
-  `Secteur` varchar(150) NOT NULL
+  `Secteur` varchar(150) NOT NULL,
+  `Inscription_Id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `online`
 --
 
-INSERT INTO `online` (`Id`, `Titre`, `Description`, `Duree`, `Niveau`, `DateHeure`, `URL`, `Formateur_Id`, `Secteur`) VALUES
-(3, 'test', 'azerty', '0000-00-00 00:00:00', '100', '0000-00-00 00:00:00', 'hzadjze', 1, 'agro');
+INSERT INTO `online` (`Id`, `Titre`, `Description`, `Duree`, `Niveau`, `DateHeure`, `URL`, `Formateur_Id`, `Secteur`, `Inscription_Id`) VALUES
+(5, 'test', 'test', 5, 'debutant', '0220-02-01 20:02:00', 'https://music.youtube.com', 1, 'test', 0);
 
 -- --------------------------------------------------------
 
@@ -299,7 +305,7 @@ CREATE TABLE `standard` (
   `Id` int(11) NOT NULL,
   `Titre` varchar(50) NOT NULL,
   `Description` text NOT NULL,
-  `Duree` datetime NOT NULL,
+  `Duree` int(11) NOT NULL,
   `Niveau` varchar(50) NOT NULL,
   `Secteur` varchar(150) NOT NULL,
   `PlanningDebut` datetime NOT NULL,
@@ -311,15 +317,16 @@ CREATE TABLE `standard` (
   `Cout` float NOT NULL,
   `Modalite` text DEFAULT NULL,
   `Commentaire` text DEFAULT NULL,
-  `Support` varchar(200) DEFAULT NULL
+  `Support` varchar(200) DEFAULT NULL,
+  `Inscription_Id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Déchargement des données de la table `standard`
 --
 
-INSERT INTO `standard` (`Id`, `Titre`, `Description`, `Duree`, `Niveau`, `Secteur`, `PlanningDebut`, `PlanningFin`, `Lieu`, `Capacite`, `Formateur_Id`, `Materiel`, `Cout`, `Modalite`, `Commentaire`, `Support`) VALUES
-(1, 'test', 'test', '0000-00-00 00:00:00', '10', 'agro', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'espi', 100, 1, 'chaises', 100, 'aucune', 'test', 'table');
+INSERT INTO `standard` (`Id`, `Titre`, `Description`, `Duree`, `Niveau`, `Secteur`, `PlanningDebut`, `PlanningFin`, `Lieu`, `Capacite`, `Formateur_Id`, `Materiel`, `Cout`, `Modalite`, `Commentaire`, `Support`, `Inscription_Id`) VALUES
+(6, 'test', 'test', 4, 'intermediaire', 'test', '0001-01-01 00:00:00', '0999-09-09 09:09:00', 'test', 20, 0, '', 99, '', '', '', 0);
 
 --
 -- Index pour les tables déchargées
@@ -334,51 +341,44 @@ ALTER TABLE `agence`
   ADD KEY `agence_contact_Id_fk_2` (`ContactFacturation_Id`);
 
 --
--- Index pour la table `association_conseil/formateur`
+-- Index pour la table `associationinscription`
 --
-ALTER TABLE `association_conseil/formateur`
-  ADD KEY `association_conseil_conseil_id_fk` (`Conseil_id`),
-  ADD KEY `association_conseil_formateur_Id_fk` (`Formateur_id`);
-
---
--- Index pour la table `association_inscription/agence`
---
-ALTER TABLE `association_inscription/agence`
+ALTER TABLE `associationinscription`
   ADD KEY `associationInscription_agence_Id_fk` (`Agence_id`),
   ADD KEY `associationInscription_inscription_id_fk` (`Inscription_id`);
 
 --
--- Index pour la table `association_inscription/contact`
+-- Index pour la table `associationinscription1`
 --
-ALTER TABLE `association_inscription/contact`
+ALTER TABLE `associationinscription1`
   ADD KEY `associationInscription1_contact_Id_fk` (`Contact_id`),
   ADD KEY `associationInscription1_inscription_id_fk` (`Inscription_id`);
 
 --
--- Index pour la table `association_inscription/online`
+-- Index pour la table `association_conseil`
 --
-ALTER TABLE `association_inscription/online`
+ALTER TABLE `association_conseil`
+  ADD KEY `association_conseil_conseil_id_fk` (`Conseil_id`),
+  ADD KEY `association_conseil_formateur_Id_fk` (`Formateur_id`);
+
+--
+-- Index pour la table `association_inscription2`
+--
+ALTER TABLE `association_inscription2`
   ADD KEY `association_inscription2_inscription_id_fk` (`Inscription_id`),
   ADD KEY `Formation_id` (`Formation_id`);
 
 --
--- Index pour la table `association_inscription/standard`
+-- Index pour la table `association_standard`
 --
-ALTER TABLE `association_inscription/standard`
-  ADD KEY `association_inscription2_inscription_id_fk` (`Inscription_id`),
-  ADD KEY `association_inscription/standard_ibfk_1` (`Formation_id`);
-
---
--- Index pour la table `association_standard/formateur`
---
-ALTER TABLE `association_standard/formateur`
+ALTER TABLE `association_standard`
   ADD KEY `association_standard_formateur_Id_fk` (`Formateur_id`),
   ADD KEY `association_standard_standard_Id_fk` (`Standard_id`);
 
 --
--- Index pour la table `association_standard/inscription`
+-- Index pour la table `association_standard1`
 --
-ALTER TABLE `association_standard/inscription`
+ALTER TABLE `association_standard1`
   ADD KEY `Inscription_Id` (`Inscription_id`),
   ADD KEY `Standard_Id` (`Standard_id`);
 
@@ -422,13 +422,15 @@ ALTER TABLE `inscription`
 --
 ALTER TABLE `online`
   ADD PRIMARY KEY (`Id`),
-  ADD KEY `online_formateur_Id_fk` (`Formateur_Id`);
+  ADD KEY `online_formateur_Id_fk` (`Formateur_Id`),
+  ADD KEY `online_association_inscription2_Inscription_id_fk` (`Inscription_Id`);
 
 --
 -- Index pour la table `standard`
 --
 ALTER TABLE `standard`
   ADD PRIMARY KEY (`Id`),
+  ADD KEY `standard_association_inscription2_Inscription_id_fk` (`Inscription_Id`),
   ADD KEY `standard_formateur_Id_fk` (`Formateur_Id`);
 
 --
@@ -457,13 +459,13 @@ ALTER TABLE `contact`
 -- AUTO_INCREMENT pour la table `demandeconseil`
 --
 ALTER TABLE `demandeconseil`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `formateur`
 --
 ALTER TABLE `formateur`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `inscription`
@@ -475,13 +477,13 @@ ALTER TABLE `inscription`
 -- AUTO_INCREMENT pour la table `online`
 --
 ALTER TABLE `online`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT pour la table `standard`
 --
 ALTER TABLE `standard`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Contraintes pour les tables déchargées
@@ -495,46 +497,47 @@ ALTER TABLE `agence`
   ADD CONSTRAINT `agence_contact_Id_fk_2` FOREIGN KEY (`ContactFacturation_Id`) REFERENCES `contact` (`Id`);
 
 --
--- Contraintes pour la table `association_conseil/formateur`
+-- Contraintes pour la table `associationinscription`
 --
-ALTER TABLE `association_conseil/formateur`
-  ADD CONSTRAINT `association_conseil_conseil_id_fk` FOREIGN KEY (`Conseil_id`) REFERENCES `conseil` (`id`),
+ALTER TABLE `associationinscription`
+  ADD CONSTRAINT `associationInscription_agence_Id_fk` FOREIGN KEY (`Agence_id`) REFERENCES `agence` (`Id`),
+  ADD CONSTRAINT `associationInscription_inscription_id_fk` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`Id`);
+
+--
+-- Contraintes pour la table `associationinscription1`
+--
+ALTER TABLE `associationinscription1`
+  ADD CONSTRAINT `associationInscription1_contact_Id_fk` FOREIGN KEY (`Contact_id`) REFERENCES `contact` (`Id`),
+  ADD CONSTRAINT `associationInscription1_inscription_id_fk` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`Id`);
+
+--
+-- Contraintes pour la table `association_conseil`
+--
+ALTER TABLE `association_conseil`
+  ADD CONSTRAINT `association_conseil_conseil_id_fk` FOREIGN KEY (`Conseil_id`) REFERENCES `conseil` (`Id`),
   ADD CONSTRAINT `association_conseil_formateur_Id_fk` FOREIGN KEY (`Formateur_id`) REFERENCES `formateur` (`Id`);
 
 --
--- Contraintes pour la table `association_inscription/agence`
+-- Contraintes pour la table `association_inscription2`
 --
-ALTER TABLE `association_inscription/agence`
-  ADD CONSTRAINT `associationInscription_agence_Id_fk` FOREIGN KEY (`Agence_id`) REFERENCES `agence` (`Id`),
-  ADD CONSTRAINT `associationInscription_inscription_id_fk` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`id`);
+ALTER TABLE `association_inscription2`
+  ADD CONSTRAINT `association_inscription2_ibfk_1` FOREIGN KEY (`Formation_id`) REFERENCES `online` (`Id`),
+  ADD CONSTRAINT `association_inscription2_ibfk_2` FOREIGN KEY (`Formation_id`) REFERENCES `standard` (`Id`),
+  ADD CONSTRAINT `association_inscription2_inscription_id_fk` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`Id`);
 
 --
--- Contraintes pour la table `association_inscription/contact`
+-- Contraintes pour la table `association_standard`
 --
-ALTER TABLE `association_inscription/contact`
-  ADD CONSTRAINT `associationInscription1_contact_Id_fk` FOREIGN KEY (`Contact_id`) REFERENCES `contact` (`Id`),
-  ADD CONSTRAINT `associationInscription1_inscription_id_fk` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`id`);
+ALTER TABLE `association_standard`
+  ADD CONSTRAINT `association_standard_formateur_Id_fk` FOREIGN KEY (`Formateur_id`) REFERENCES `formateur` (`Id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `association_standard_standard_Id_fk` FOREIGN KEY (`Standard_id`) REFERENCES `standard` (`Id`) ON DELETE CASCADE;
 
 --
--- Contraintes pour la table `association_inscription/standard`
+-- Contraintes pour la table `association_standard1`
 --
-ALTER TABLE `association_inscription/standard`
-  ADD CONSTRAINT `association_inscription/standard_ibfk_1` FOREIGN KEY (`Formation_id`) REFERENCES `standard` (`Id`),
-  ADD CONSTRAINT `association_inscription2_inscription_id_fk` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`id`);
-
---
--- Contraintes pour la table `association_standard/formateur`
---
-ALTER TABLE `association_standard/formateur`
-  ADD CONSTRAINT `association_standard_formateur_Id_fk` FOREIGN KEY (`Formateur_Id`) REFERENCES `formateur` (`Id`),
-  ADD CONSTRAINT `association_standard_standard_Id_fk` FOREIGN KEY (`Standard_Id`) REFERENCES `standard` (`Id`);
-
---
--- Contraintes pour la table `association_standard/inscription`
---
-ALTER TABLE `association_standard/inscription`
-  ADD CONSTRAINT `association_standard/inscription_ibfk_1` FOREIGN KEY (`Inscription_Id`) REFERENCES `inscription` (`id`),
-  ADD CONSTRAINT `association_standard/inscription_ibfk_2` FOREIGN KEY (`Standard_Id`) REFERENCES `standard` (`Id`);
+ALTER TABLE `association_standard1`
+  ADD CONSTRAINT `association_standard1_ibfk_1` FOREIGN KEY (`Inscription_id`) REFERENCES `inscription` (`Id`),
+  ADD CONSTRAINT `association_standard1_ibfk_2` FOREIGN KEY (`Standard_id`) REFERENCES `standard` (`Id`);
 
 --
 -- Contraintes pour la table `demandeconseil`
