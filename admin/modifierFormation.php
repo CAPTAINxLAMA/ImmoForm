@@ -178,7 +178,7 @@ else
 
             <label>Formateur:</label>
             <select name="formateur_id" required>
-                <option><?php echo htmlentities($formateur["Nom"]).' '.htmlentities($formateur["Prenom"]); ?></option>
+                <option>-- Choisissez un formateur --</option>
                 <?php
                 // Connexion à la base de données
                 include_once "../includes/config.php";
