@@ -19,7 +19,8 @@ $req->execute();
 
 $formationsS = $req->fetchAll();
 
-$reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM `association_standard/formateur` JOIN formateur ON `association_standard/formateur`.Formateur_id = formateur.Id");
+$reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM `association_standard/formateur` JOIN formateur ON `association_standard/formateur`.Formateur_id = formateur.Id WHERE `association_standard/formateur`.Standard_id = :Standard_id");
+$reqLink->bindParam( ':Standard_id', $formationsS["Id"]);
 $reqLink->execute();
 
 $formateurs = $reqLink->fetchAll();
