@@ -23,7 +23,7 @@ $contact = $req->fetchAll();
 
 <main>
     <div class="container">
-        <h2>Une demande de conseil :</h2>
+        <h2>Faire une Demande :</h2>
         <br>
         <form action="../actions/createDemande.php" method="POST">
             <label>Type de demande :</label>

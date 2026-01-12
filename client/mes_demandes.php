@@ -42,7 +42,7 @@ $conseils = $req->fetchAll();
                 <td>
                         <?php echo '<a href="modifierDemande.php?id='. $conseil["Id"].'" class="btn1">Modifier</a>';?>
                 <td>
-                    <?php echo '<a href="supprimerDemande.php?id='.$conseil["Id"].' ?>" class="btn2">Supprimer</a>';
+                    <?php echo '<a href="supprimerDemande.php?id='.$conseil["Id"].'" class="btn2">Supprimer</a>';
                     }
                     ?>
                 </td>
