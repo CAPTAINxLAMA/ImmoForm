@@ -29,7 +29,7 @@ $formations = $req->fetchAll();
 <div class="container">
     <h2>Mes Conseils :</h2>
     <table>
-        <tr>
+        <tr style="font-size: 10px">
             <th>Titre</th>
             <th>Description</th>
             <th>Durée</th>
@@ -44,7 +44,7 @@ $formations = $req->fetchAll();
         foreach ($conseils as $conseil)
         {
             ?>
-            <tr>
+            <tr style="font-size: 10px">
                 <td><?php echo $conseil["Titre"] ?></td>
                 <td><?php echo $conseil["Description"] ?></td>
                 <td><?php echo $conseil["Duree"] ?> minutes</td>
@@ -68,7 +68,7 @@ $formations = $req->fetchAll();
 
     <h2>Mes Formations Standard:</h2>
     <table>
-        <tr>
+        <tr style="font-size: 10px">
             <th>Titre</th>
             <th>Description</th>
             <th>Durée</th>
@@ -94,7 +94,7 @@ $formations = $req->fetchAll();
 
             $formateurs = $reqLink->fetchAll();
             ?>
-            <tr>
+            <tr style="font-size: 10px">
                 <td><?php echo $formationS["Titre"] ?></td>
                 <td><?php echo $formationS["Description"] ?></td>
                 <td><?php echo $formationS["Duree"] ?></td>
@@ -130,7 +130,7 @@ $formations = $req->fetchAll();
 
     <h2>Mes Formations En ligne:</h2>
     <table>
-        <tr>
+        <tr style="font-size: 10px">
             <th>Titre</th>
             <th>Description</th>
             <th>Durée</th>
@@ -149,7 +149,7 @@ $formations = $req->fetchAll();
 
             $formateur = $req->fetchAll();
             ?>
-            <tr>
+            <tr style="font-size: 10px">
                 <td><?php echo $formation["Titre"] ?></td>
                 <td><?php echo $formation["Description"] ?></td>
                 <td><?php echo $formation["Duree"] ?></td>
