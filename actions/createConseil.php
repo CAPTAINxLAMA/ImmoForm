@@ -39,7 +39,7 @@ $req->execute();
 
 $conseil_Id = $pdo->lastInsertId();
 
-$req = $pdo->prepare("INSERT INTO formateur_conseil (Formateur_id, Conseil_id) VALUES (:formateur_Id, )");
+$req = $pdo->prepare("INSERT INTO formateur_conseil (Formateur_id, Conseil_id) VALUES (:formateur_Id, :conseil_Id)");
 $req->bindParam(':formateur_Id', $formateur_Id);
 $req->bindParam(':conseil_Id', $conseil_Id);
 $req->execute();

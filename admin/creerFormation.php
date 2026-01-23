@@ -26,7 +26,7 @@ if ($standard)
                 <input type="text" name="description" required>
 
                 <label>Durée :</label>
-                <input type="number" name="duree" placeholder="En heures" required>
+                <input type="number" name="duree" placeholder="En minutes" required>
 
                 <label>Niveau :</label>
                 <select name="niveau" required>
@@ -120,7 +120,7 @@ else {
                 <input type="text" name="description" required>
 
                 <label>Durée :</label>
-                <input type="number" name="duree" placeholder="En heures" required>
+                <input type="number" name="duree" placeholder="En minutes" required>
 
                 <label>Niveau :</label>
                 <select name="niveau" required>

@@ -34,6 +34,7 @@ $demandes = $req->fetchAll();
         <?php
         foreach ($demandes as $demande)
         {
+            $demande_id = $demande["Id"];
             ?>
             <tr>
                 <td><?php echo $demande["Type"] ?></td>
@@ -41,6 +42,7 @@ $demandes = $req->fetchAll();
                 <td><?php echo $demande["Date"] ?></td>
                 <td><?php echo $demande["Statut"]; ?></td>
                 <td><?php if ($demande["Formateur_id"] == Null) { echo "Non assigné"; }
+
                     else {
                         // Envoie de la requête SQL
                         $req = $pdo->prepare("SELECT * FROM demandes JOIN formateur ON Formateur_Id = formateur.Id WHERE demandes.Id=:id");
@@ -55,17 +57,17 @@ $demandes = $req->fetchAll();
                 </td>
                 <td>
                     <?php if ($demande["Type"] == "Conseil") {
-                        echo '<a href="./creerConseil.php?id="'.$demande["Id"].' class="btn3">Créer un Nouveau Conseil</a>';
+                        echo '<a href="./creerConseil.php?id='. $demande_id .'" class="btn3">Créer un Nouveau Conseil</a>';
                     }
                     else if ($demande["Type"] == "Formation") {
-                        echo '<a href="./creerFormation.php?id='.$demande["Id"].'&standard=1" class="btn3">Créer une Nouvelle Formation</a>';
+                        echo '<a href="./creerFormation.php?id='.$demande_id.'&standard=1" class="btn3">Créer une Nouvelle Formation</a>';
                     }
                     ?>
                 </td>
                 <td>
                     <form action="../actions/acceptDemande.php" method="POST">
                         <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
-                        <input type="hidden" name="id" value="<?php echo $demande["Id"] ?>">
+                        <input type="hidden" name="id" value="<?php echo $demande_id?>">
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
                         <input class="btn0" type="submit" value="Prendre en charge">
                     </form>
@@ -73,7 +75,7 @@ $demandes = $req->fetchAll();
                 <td>
                     <form action="../actions/refuseDemande.php" method="POST">
                         <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
-                        <input type="hidden" name="id" value="<?php echo $demande["Id"] ?>">
+                        <input type="hidden" name="id" value="<?php echo $demande_id?>">
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
                         <input class="btn0" type="submit" value="Rejeter">
                     </form>

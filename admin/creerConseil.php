@@ -8,6 +8,7 @@ $token = rand(0, 1000000);
 $_SESSION['token'] = $token;
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+var_dump($id);
 ?>
 
 <main>

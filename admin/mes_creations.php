@@ -9,7 +9,7 @@ include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare("SELECT conseil.Id AS conseilId, conseil.Titre, conseil.Description, conseil.Duree, conseil.Date, conseil.Lieu, conseil.Support, conseil.Cout, conseil.Commentaire, formateur.Nom, formateur.Prenom FROM conseil LEFT JOIN formateur ON conseil.formateur_id = formateur.id");
+$req = $pdo->prepare("SELECT conseil.Id AS conseilId, conseil.Titre, conseil.Description, conseil.Duree, conseil.Date, conseil.Lieu, conseil.Support, conseil.Cout, conseil.Commentaire, formateur.Nom, formateur.Prenom FROM conseil LEFT JOIN formateur_conseil ON conseil.Id = formateur_conseil.Conseil_id LEFT JOIN formateur ON formateur_conseil.Formateur_id");
 $req->execute();
 
 $conseils = $req->fetchAll();
@@ -144,7 +144,7 @@ $formations = $req->fetchAll();
         foreach ($formations as $formation)
         {
             $req = $pdo->prepare("SELECT * FROM formateur WHERE Id = :formateur_id");
-            $req->bindParam(':formateur_id', $formation["Formateur_Id"]);
+            $req->bindParam(':formateur_id', $formation["Formateur_id"]);
             $req->execute();
 
             $formateur = $req->fetchAll();
