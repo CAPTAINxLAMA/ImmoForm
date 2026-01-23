@@ -59,11 +59,11 @@ if ($standard === 1) {
     $req->execute();
 
     /* Liaison formateurs */
-    $reqLink = $pdo->prepare("DELETE FROM association_standard WHERE Standard_Id = :formation_id");
+    $reqLink = $pdo->prepare("DELETE FROM formateur_standard WHERE Standard_Id = :formation_id");
     $reqLink->bindParam(':formation_id', $id);
     $reqLink->execute();
 
-    $reqLink = $pdo->prepare("INSERT INTO association_standard (Standard_id, Formateur_id) VALUES (:formation_id, :formateur_id)");
+    $reqLink = $pdo->prepare("INSERT INTO formateur_standard (Standard_id, Formateur_id) VALUES (:formation_id, :formateur_id)");
 
     foreach ($formateurs as $formateurId) {
         $formateurId = intval($formateurId);

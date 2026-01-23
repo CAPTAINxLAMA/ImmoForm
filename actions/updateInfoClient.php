@@ -29,7 +29,7 @@ $agenceId = filter_input(INPUT_POST, 'Agence_Id', FILTER_VALIDATE_INT );
 include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req = $pdo->prepare("UPDATE contact SET  Nom = :nom, Prenom = :prenom, Numero = :numero, Email = :email, Fonction = :fonction, PreferenceContact = :preferenceContact, Commentaire = :commentaire, Agence_Id = :agenceId WHERE Id = :id");
+$req = $pdo->prepare("UPDATE contact SET  Nom = :nom, Prenom = :prenom, Numero = :numero, Email = :email, Fonction = :fonction, PreferenceContact = :preferenceContact, Commentaire = :commentaire WHERE Id = :id");
 $req->bindParam(':id', $id);
 $req->bindParam(':nom', $nom);
 $req->bindParam(':prenom', $prenom);
@@ -38,7 +38,11 @@ $req->bindParam(':email', $email);
 $req->bindParam(':fonction', $fonction);
 $req->bindParam(':preferenceContact', $preferenceContact);
 $req->bindParam(':commentaire', $commentaire);
+$req->execute();
+
+$req = $pdo->prepare("UPDATE contact_agence SET  Agence_Id = :agenceId WHERE Contact_id = :id");
 $req->bindParam(':agenceId', $agenceId);
 $req->execute();
+
 
 header('Location: ../client/navbar.php');

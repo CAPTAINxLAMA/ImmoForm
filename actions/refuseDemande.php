@@ -10,16 +10,16 @@ if($tokenRecu != $tokenServeur)
 }
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
-$rejet = filter_input(INPUT_POST, 'formateur_id', FILTER_VALIDATE_INT);
+$formateur_id = filter_input(INPUT_POST, 'formateur_id', FILTER_VALIDATE_INT);
 
 // Connexion à la base de données
 include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare('update demandeconseil set Statut="Refusé", Formateur_Id=:rejet where Id=:id');
+$req = $pdo->prepare('update demande set Statut="Refusé", Formateur_Id=:formateur_id where Id=:id');
 $req->bindParam(':id', $id);
-$req->bindParam(':rejet', $rejet);
+$req->bindParam(':formateur_id', $formateur_id);
 
 $req->execute();
 

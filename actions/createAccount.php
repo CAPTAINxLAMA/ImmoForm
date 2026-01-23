@@ -33,7 +33,7 @@ if ($emailContactExiste[0]["Email"] == $email && $password == $confirm_password 
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Envoie de la requête SQL
-    $req = $pdo->prepare("UPDATE contact SET mdp = :password WHERE Email = :email");
+    $req = $pdo->prepare("UPDATE contact SET mdp_hash = :password WHERE Email = :email");
     $req->bindParam(':password', $hashedPassword);
     $req->bindParam(':email', $emailContactExiste[0]["Email"]);
     $req->execute();
@@ -46,7 +46,7 @@ else if ($emailAdminExiste[0]["Email"] == $email && $password == $confirm_passwo
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
     // Envoie de la requête SQL
-    $req = $pdo->prepare("UPDATE formateur SET mdp = :password WHERE Email = :email");
+    $req = $pdo->prepare("UPDATE formateur SET mdp_hash = :password WHERE Email = :email");
     $req->bindParam(':password', $hashedPassword);
     $req->bindParam(':email', $emailAdminExiste[0]["Email"]);
     $req->execute();

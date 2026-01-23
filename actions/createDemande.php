@@ -21,7 +21,7 @@ include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare("INSERT INTO demandeconseil (Type, Description, Contact_Id, Agence_Id, Date, Statut) VALUES (:type, :description, :contact_Id, :agence_Id, :date, 'En attente')");
+$req = $pdo->prepare("INSERT INTO demande (Type, Description, Contact_Id, Agence_Id, Date, Statut) VALUES (:type, :description, :contact_Id, :agence_Id, :date, 'En attente')");
 $req->bindParam(':type', $type);
 $req->bindParam(':description', $description);
 $req->bindParam(':agence_Id', $agence_id);
