@@ -22,7 +22,7 @@ $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
             <input type="text" name="description" required>
 
             <label>Durée :</label>
-            <input type="number" name="duree" placeholder="En heures" required>
+            <input type="number" name="duree" placeholder="En minutes" required>
 
             <label>Coût :</label>
             <input type="number" step="0.01" name="cout" placeholder="En euro" required>

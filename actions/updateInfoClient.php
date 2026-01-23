@@ -39,10 +39,10 @@ $req->bindParam(':preferenceContact', $preferenceContact);
 $req->bindParam(':commentaire', $commentaire);
 $req->execute();
 
-$req = $pdo->prepare("UPDATE contact_agence SET  Agence_id = :agenceId WHERE Contact_id = :id");
-$req->bindParam(':agenceId', $agenceId);
-$req->bindParam(':id', $id);
-$req->execute();
+$reqAgence = $pdo->prepare("UPDATE contact_agence SET  Agence_id = :agenceId WHERE Contact_id = :id");
+$reqAgence->bindParam(':agenceId', $agenceId);
+$reqAgence->bindParam(':id', $id);
+$reqAgence->execute();
 
 
 header('Location: ../client/navbar.php');

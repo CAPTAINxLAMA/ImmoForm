@@ -17,7 +17,7 @@ include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare("DELETE FROM demande WHERE Id=:Id");
+$req = $pdo->prepare("DELETE FROM demandes WHERE Id=:Id");
 $req->bindParam(':Id', $id);
 $req->execute();
 

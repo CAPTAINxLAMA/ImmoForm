@@ -52,6 +52,28 @@ $client = $client[0]
         <label>Email :</label><br>
         <input type="email" name="Email" value="<?php echo htmlentities($client['Email']); ?>" readonly maxlength="150">
         <br>
+        <label>Agence :</label>
+        <select name="Agence_Id" required>
+            <option value="">-- Aucune agence --</option>
+            <?php
+            // Récupérer toutes les agences
+            $reqAgences = $pdo->prepare("SELECT Id, Nom FROM agence WHERE Statut = 1");
+            $reqAgences->execute();
+            $agences = $reqAgences->fetchAll();
+
+            // Récupérer l'agence actuelle du contact
+            $reqAgenceActuelle = $pdo->prepare("SELECT Agence_id FROM contact_agence WHERE Contact_id = :id");
+            $reqAgenceActuelle->execute([':id' => $id]);
+            $agenceActuelle = $reqAgenceActuelle->fetch();
+            $agenceActuelleId = $agenceActuelle ? $agenceActuelle['Agence_id'] : null;
+
+            // Afficher les options
+            foreach ($agences as $agence) {
+                $selected = ($agenceActuelleId == $agence['Id']) ? 'selected' : '';
+                echo '<option value="'.$agence['Id'].'" '.$selected.'>'.htmlentities($agence['Nom']).'</option>';
+            }
+            ?>
+        </select>
         <label>Fonction :</label>
         <input type="text" name="Fonction" value="<?php echo htmlentities($client['Fonction']); ?>" maxlength="100">
         <br>

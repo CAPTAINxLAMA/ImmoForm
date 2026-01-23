@@ -17,7 +17,7 @@ include "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare('update demande set Statut="Refusé", Formateur_Id=:formateur_id where Id=:id');
+$req = $pdo->prepare('update demandes set Statut="Refusé", Formateur_Id=:formateur_id where Id=:id');
 $req->bindParam(':id', $id);
 $req->bindParam(':formateur_id', $formateur_id);
 

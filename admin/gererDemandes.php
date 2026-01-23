@@ -15,7 +15,7 @@ $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, confi
 $req = $pdo->prepare("SELECT * FROM demandes");
 $req->execute();
 
-$demande = $req->fetchAll();
+$demandes = $req->fetchAll();
 ?>
 
 <div class="container">
@@ -32,19 +32,19 @@ $demande = $req->fetchAll();
             <th></th>
         </tr>
         <?php
-        foreach ($demande as $conseil)
+        foreach ($demandes as $demande)
         {
             ?>
             <tr>
-                <td><?php echo $conseil["Type"] ?></td>
-                <td><?php echo $conseil["Description"] ?></td>
-                <td><?php echo $conseil["Date"] ?></td>
-                <td><?php echo $conseil["Statut"]; ?></td>
-                <td><?php if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }
+                <td><?php echo $demande["Type"] ?></td>
+                <td><?php echo $demande["Description"] ?></td>
+                <td><?php echo $demande["Date"] ?></td>
+                <td><?php echo $demande["Statut"]; ?></td>
+                <td><?php if ($demande["Formateur_id"] == Null) { echo "Non assigné"; }
                     else {
                         // Envoie de la requête SQL
-                        $req = $pdo->prepare("SELECT * FROM demande JOIN formateur ON Formateur_Id = formateur.Id WHERE demande.Id=:id");
-                        $req->bindParam(':id', $conseil["Id"]);
+                        $req = $pdo->prepare("SELECT * FROM demandes JOIN formateur ON Formateur_Id = formateur.Id WHERE demandes.Id=:id");
+                        $req->bindParam(':id', $demande["Id"]);
                         $req->execute();
 
                         $format = $req->fetch();
@@ -54,18 +54,18 @@ $demande = $req->fetchAll();
                     ?>
                 </td>
                 <td>
-                    <?php if ($conseil["Type"] == "Conseil") {
-                        echo '<a href="./creerConseil.php?id="'.$conseil["Id"].' class="btn3">Créer un Nouveau Conseil</a>';
+                    <?php if ($demande["Type"] == "Conseil") {
+                        echo '<a href="./creerConseil.php?id="'.$demande["Id"].' class="btn3">Créer un Nouveau Conseil</a>';
                     }
-                    else if ($conseil["Type"] == "Formation") {
-                        echo '<a href="./creerFormation.php?id='.$conseil["Id"].'&standard=1" class="btn3">Créer une Nouvelle Formation</a>';
+                    else if ($demande["Type"] == "Formation") {
+                        echo '<a href="./creerFormation.php?id='.$demande["Id"].'&standard=1" class="btn3">Créer une Nouvelle Formation</a>';
                     }
                     ?>
                 </td>
                 <td>
                     <form action="../actions/acceptDemande.php" method="POST">
                         <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
-                        <input type="hidden" name="id" value="<?php echo $conseil["Id"] ?>">
+                        <input type="hidden" name="id" value="<?php echo $demande["Id"] ?>">
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
                         <input class="btn0" type="submit" value="Prendre en charge">
                     </form>
@@ -73,7 +73,7 @@ $demande = $req->fetchAll();
                 <td>
                     <form action="../actions/refuseDemande.php" method="POST">
                         <input type="hidden" name="formateur_id" value="<?php echo $_SESSION['user']['id']; ?>">
-                        <input type="hidden" name="id" value="<?php echo $conseil["Id"] ?>">
+                        <input type="hidden" name="id" value="<?php echo $demande["Id"] ?>">
                         <input type="hidden" name="token" value="<?php echo $token; ?>">
                         <input class="btn0" type="submit" value="Rejeter">
                     </form>
