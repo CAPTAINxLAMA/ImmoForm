@@ -19,7 +19,7 @@ include_once('../includes/config.php');
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req=$pdo->prepare("SELECT * FROM demande WHERE Id = :id");
+$req=$pdo->prepare("SELECT * FROM demandes WHERE Id = :id");
 $req->bindParam(':id', $id);
 $req->execute();
 
@@ -45,10 +45,10 @@ if(count($demande)!=1){
                 <th>Statut</th>
             </tr>
             <tr>
-                <td><?php echo htmlentities($demandeconseil[0]["Type"]) ?></td>
-                <td><?php echo htmlentities($demandeconseil[0]["Description"]) ?></td>
-                <td><?php echo htmlentities($demandeconseil[0]["Date"]) ?></td>
-                <td><?php echo htmlentities($demandeconseil[0]["Statut"]) ?></td>
+                <td><?php echo htmlentities($demande[0]["Type"]) ?></td>
+                <td><?php echo htmlentities($demande[0]["Description"]) ?></td>
+                <td><?php echo htmlentities($demande[0]["Date"]) ?></td>
+                <td><?php echo htmlentities($demande[0]["Statut"]) ?></td>
             </tr>
         </table>
         <input type="hidden" name="token" value="<?php echo $token; ?>">

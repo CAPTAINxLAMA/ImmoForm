@@ -12,7 +12,7 @@ include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare("SELECT * FROM demande");
+$req = $pdo->prepare("SELECT * FROM demandes");
 $req->execute();
 
 $demande = $req->fetchAll();

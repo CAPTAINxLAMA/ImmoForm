@@ -21,7 +21,7 @@ if (!$id) {
 // Connexion à la base de données
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req=$pdo->prepare("SELECT * FROM demande WHERE Id=:id");
+$req=$pdo->prepare("SELECT * FROM demandes WHERE Id=:id");
 $req->bindParam(':id', $id);
 $req->execute();
 
