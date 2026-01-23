@@ -2,10 +2,10 @@
 //Initialisation de la connection à la base de donnée
 class config
 {
-    const host = "localhost";
-    const user = "root";
-    const password = "";
-    const dbname = "immoform1";
+    const host = "localhost"; // 172.16.119.130
+    const user = "root"; // immoform_user
+    const password = ""; // azerty
+    const dbname = "immoform1"; // immoform
 }
 
 // test de connection
