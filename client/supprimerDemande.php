@@ -19,14 +19,14 @@ include_once('../includes/config.php');
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req=$pdo->prepare("SELECT * FROM demandeconseil WHERE Id = :id");
+$req=$pdo->prepare("SELECT * FROM demande WHERE Id = :id");
 $req->bindParam(':id', $id);
 $req->execute();
 
-$demandeconseil = $req->fetchAll();
+$demande = $req->fetchAll();
 
 // vérification de l'unicité du conseil
-if(count($demandeconseil)!=1){
+if(count($demande)!=1){
     http_response_code(404);
     die("Pas de demande conseil pour l'id ".$id);
 }

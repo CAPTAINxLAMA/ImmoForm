@@ -21,7 +21,7 @@ $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::use
 
 if ($standard_oupas)
 {
-    $req = $pdo->prepare("SELECT Id, Titre, Description, Duree, Niveau, Secteur, PlanningDebut, PlanningFin, Lieu, Capacite, Materiel, Cout, Modalite, Commentaire, Support FROM standard WHERE Id = :id");
+    $req = $pdo->prepare("SELECT * FROM standard WHERE Id = :id");
     $req->bindParam( ':id', $id);
     $req->execute();
 
@@ -29,7 +29,7 @@ if ($standard_oupas)
 
     $form_id = $formationS["Id"];
 
-    $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM association_standard JOIN formateur ON association_standard.Formateur_id = formateur.Id WHERE association_standard.Standard_id = :Standard_id");
+    $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM formateur JOIN formateur_standard ON formateur.Id = formateur_standard.Formateur_id JOIN standard ON formateur_standard.Standard_id = standard.Id WHERE formateur_standard.Standard_id = :Standard_id");
     $reqLink->bindParam( ':Standard_id', $form_id);
     $reqLink->execute();
 
@@ -79,7 +79,7 @@ if ($standard_oupas)
             <label>Capacité d'accueil :</label>
             <input type="number" name="capacite" required value="<?php echo htmlentities($formationS[0]["Capacite"]) ?>">
 
-            <label>Formateurs (2 ou plus):</label>
+            <label>Formateurs (2 ou plus): </label>
             <br>
             <i><small>Maintenez CTRL (ou CMD sur Mac) pour sélectionner plusieurs formateurs</small></i>
 

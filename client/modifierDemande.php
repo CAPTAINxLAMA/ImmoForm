@@ -21,14 +21,14 @@ if (!$id) {
 // Connexion à la base de données
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
-$req=$pdo->prepare("SELECT * FROM demandeconseil WHERE Id=:id");
+$req=$pdo->prepare("SELECT * FROM demande WHERE Id=:id");
 $req->bindParam(':id', $id);
 $req->execute();
 
-$demandeconseil=$req->fetchAll();
+$demande=$req->fetchAll();
 
 // vérification que j'en ai bien récupéré une seule
-if(count($demandeconseil)!=1){
+if(count($demande)!=1){
     http_response_code(404);
     die("Pas de demande conseil pour l'id ".$id);
 }
@@ -41,12 +41,12 @@ if(count($demandeconseil)!=1){
     <form action="../actions/updateDemande.php" method="post">
         <label>Type de demande :</label>
         <select required name="type">
-            <option value="Conseil" <?php echo ($demandeconseil[0]["Type"] == "Conseil") ? "selected" : ""; ?>>Conseil</option>
-            <option value="Formation" <?php echo ($demandeconseil[0]["Type"] == "Formation") ? "selected" : ""; ?>>Formation</option>
+            <option value="Conseil" <?php echo ($demande[0]["Type"] == "Conseil") ? "selected" : ""; ?>>Conseil</option>
+            <option value="Formation" <?php echo ($demande[0]["Type"] == "Formation") ? "selected" : ""; ?>>Formation</option>
         </select>
 
         <label>Description :</label>
-        <textarea name="description" rows="4"><?php echo htmlentities($demandeconseil[0]["Description"]) ?></textarea>
+        <textarea name="description" rows="4"><?php echo htmlentities($demande[0]["Description"]) ?></textarea>
 
         <input type="hidden" name="id" value="<?php echo $id ?>"/>
         <input type="hidden" name="token" value="<?php echo $token; ?>">

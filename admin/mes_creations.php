@@ -88,7 +88,7 @@ $formations = $req->fetchAll();
         <?php
         foreach ($formationsS as $formationS)
         {
-            $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM association_standard JOIN formateur ON association_standard.Formateur_id = formateur.Id WHERE association_standard.Standard_id = :Standard_id");
+            $reqLink = $pdo->prepare("SELECT formateur.Nom, formateur.Prenom FROM formateur JOIN formateur_standard ON formateur.Id = formateur_standard.Formateur_id JOIN standard ON formateur_standard.Standard_id = standard.Id WHERE formateur_standard.Standard_id = :Standard_id");
             $reqLink->bindParam( ':Standard_id', $formationS["Id"]);
             $reqLink->execute();
 
@@ -128,7 +128,7 @@ $formations = $req->fetchAll();
         ?>
     </table>
 
-    <h2>Mes Formations En ligne:</h2>
+    <h2>Mes Formations En ligne :</h2>
     <table>
         <tr style="font-size: 10px">
             <th>Titre</th>

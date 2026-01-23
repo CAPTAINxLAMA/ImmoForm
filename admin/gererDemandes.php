@@ -12,10 +12,10 @@ include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=" . config::host . ";dbname=" . config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare("SELECT * FROM demandeconseil");
+$req = $pdo->prepare("SELECT * FROM demande");
 $req->execute();
 
-$demandeconseil = $req->fetchAll();
+$demande = $req->fetchAll();
 ?>
 
 <div class="container">
@@ -32,7 +32,7 @@ $demandeconseil = $req->fetchAll();
             <th></th>
         </tr>
         <?php
-        foreach ($demandeconseil as $conseil)
+        foreach ($demande as $conseil)
         {
             ?>
             <tr>
@@ -43,7 +43,7 @@ $demandeconseil = $req->fetchAll();
                 <td><?php if ($conseil["Formateur_Id"] == Null) { echo "Non assigné"; }
                     else {
                         // Envoie de la requête SQL
-                        $req = $pdo->prepare("SELECT * FROM demandeconseil JOIN formateur ON Formateur_Id = formateur.Id WHERE demandeconseil.Id=:id");
+                        $req = $pdo->prepare("SELECT * FROM demande JOIN formateur ON Formateur_Id = formateur.Id WHERE demande.Id=:id");
                         $req->bindParam(':id', $conseil["Id"]);
                         $req->execute();
 

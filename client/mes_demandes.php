@@ -9,7 +9,7 @@ include_once "../includes/config.php";
 $pdo = new PDO("mysql:host=".config::host.";dbname=".config::dbname, config::user, config::password);
 
 // Envoie de la requête SQL
-$req = $pdo->prepare("SELECT * FROM demandeconseil ORDER BY demandeconseil.Id ASC");
+$req = $pdo->prepare("SELECT * FROM demande ORDER BY demande.Id ASC");
 $req->execute();
 
 $conseils = $req->fetchAll();
