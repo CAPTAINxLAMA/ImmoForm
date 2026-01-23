@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 
 require '../includes/auth.php';
 requireRole('client');
@@ -40,8 +39,9 @@ $req->bindParam(':preferenceContact', $preferenceContact);
 $req->bindParam(':commentaire', $commentaire);
 $req->execute();
 
-$req = $pdo->prepare("UPDATE contact_agence SET  Agence_Id = :agenceId WHERE Contact_id = :id");
+$req = $pdo->prepare("UPDATE contact_agence SET  Agence_id = :agenceId WHERE Contact_id = :id");
 $req->bindParam(':agenceId', $agenceId);
+$req->bindParam(':id', $id);
 $req->execute();
 
 
