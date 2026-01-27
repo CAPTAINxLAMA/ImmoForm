@@ -43,7 +43,7 @@ if ($req->fetch()) {
             $req->bindParam(':email', $emailContactExiste[0]["Email"]);
             $req->execute();
 
-            header("Location: /ImmoForm/includes/connexion.php");
+            header("Location: ../includes/connexion.php");
         }
         else if ($emailAdminExiste[0]["Email"] == $email && $password == $confirm_password && $emailAdminExiste[0]["mdp"] == NULL)
         {
@@ -54,7 +54,7 @@ if ($req->fetch()) {
             $req->bindParam(':email', $emailAdminExiste[0]["Email"]);
             $req->execute();
 
-            header("Location: /ImmoForm/includes/connexion.php");
+            header("Location: ../includes/connexion.php");
         }
         else
         {

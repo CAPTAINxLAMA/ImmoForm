@@ -21,4 +21,4 @@ $req = $pdo->prepare("delete from conseil where Id=:id");
 $req->bindParam(':id', $id);
 $req->execute();
 
-header("Location: ../Admin/mes_creations.php");
+header("Location: ../admin/mes_creations.php");

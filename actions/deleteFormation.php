@@ -32,4 +32,4 @@ else if (!$standard)
 
 $req->execute();
 
-header("Location: ../Admin/mes_creations.php");
+header("Location: ../admin/mes_creations.php");
