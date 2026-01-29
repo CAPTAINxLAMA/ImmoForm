@@ -4,7 +4,7 @@ session_start();
 // Vérification si l'utilisateur est bien connecté
 function requireLogin() {
     if (!isset($_SESSION['user'])) {
-        header('Location: login.php');
+        header('Location: connexion.php');
         exit;
     }
 }
